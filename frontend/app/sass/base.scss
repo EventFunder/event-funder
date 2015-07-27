@@ -2,17 +2,30 @@ $padding:2%;
 $alpha: rgb(99,166,159);//blue
 $bravo: rgb(242,225,172);//tan
 $charlie:rgb(242,131,107);//red
+$gama:rgb(101,109,242);//bright blue
 
-button{
-  float: right;
+@mixin center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header{
+  border-bottom: 1px solid $alpha;
 }
 h1, h2{
   text-align: center;
 }
+h2{
+  margin: 0 32%;
+  border-radius: 20px;
+  background: $alpha;
+}
+#EventsPage h2:hover {
+  background: $charlie;
+}
 img{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  @include center;
 }
 fieldset{
   border: 0 none;
@@ -22,27 +35,46 @@ a{
   width: 30%;
   margin: 0 auto;
   text-align: center;
-  display: block;
+  @include center;
   padding: $padding;
   background: $alpha;
 }
 a:nth-child(even) {
     background: $charlie;
 }
+a:hover{
+  background: $gama;
+}
+label{
+  @include center;
+}
+textarea{
+  @include center;
+}
 p{
   padding-left: $padding;
   padding-right: $padding;
   text-align: center;
-  margin: 4%;
+  margin: $padding 4%;
 }
 section {
-  margin: 2%;
-  border: 1px solid black;
+  margin: 5%;
+  // border: 1px solid black;
+  background: $bravo;
+  border-radius: 10px;
 }
 input{
-  text-align: center;
-  display: block;
+  @include center;
+  line-height: 18px;
+}
+footer{
+  border-top: 1px solid black;
 }
 #login{
   background: $bravo;
+  margin: 44%;
+  display: none;
+}
+#createEvent{
+
 }
