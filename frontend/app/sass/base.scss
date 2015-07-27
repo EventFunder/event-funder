@@ -1,0 +1,48 @@
+$padding:2%;
+$alpha: rgb(99,166,159);//blue
+$bravo: rgb(242,225,172);//tan
+$charlie:rgb(242,131,107);//red
+
+button{
+  float: right;
+}
+h1, h2{
+  text-align: center;
+}
+img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+fieldset{
+  border: 0 none;
+  padding: $padding;
+}
+a{
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  display: block;
+  padding: $padding;
+  background: $alpha;
+}
+a:nth-child(even) {
+    background: $charlie;
+}
+p{
+  padding-left: $padding;
+  padding-right: $padding;
+  text-align: center;
+  margin: 4%;
+}
+section {
+  margin: 2%;
+  border: 1px solid black;
+}
+input{
+  text-align: center;
+  display: block;
+}
+#login{
+  background: $bravo;
+}
