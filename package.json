@@ -1,0 +1,20 @@
+{
+  "name": "event-funder",
+  "version": "0.0.0",
+  "description": "This is app is an event planning application that will allow the user to host an event and get financial commitments from the attendees",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "Vi Dang, Farhad Ahmed, Andre Dinh",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "chai": "~3.2.0",
+    "jshint": "~2.8.0",
+    "mocha": "~2.2.5",
+    "chai-http": "~1.0.0",
+    "gulp-mocha": "~2.1.3",
+    "gulp": "~3.9.0",
+    "gulp-jshint": "~1.11.2"
+  }
+}
