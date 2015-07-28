@@ -45,9 +45,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
+	__webpack_require__(6);
 	__webpack_require__(4);
-	__webpack_require__(5);
-	module.exports = __webpack_require__(6);
+	module.exports = __webpack_require__(5);
 
 
 /***/ },
@@ -62,9 +62,9 @@
 	var eventFunder = angular.module('eventFunder', ['ngRoute']);
 
 	//controllers
+	// require("./controllers/EventController.js")(eventFunder);
 	__webpack_require__(4)(eventFunder);
 	__webpack_require__(5)(eventFunder);
-	__webpack_require__(6)(eventFunder);
 
 	//routing
 	eventFunder.config(['$routeProvider', function($routeProvider) {
@@ -73,16 +73,14 @@
 			templateUrl: '/templates/eventTemplate.html',
 			controller: 'EventController'
 		})
-	  .when('/login',{
-	    templateUrl:'/templates/loginTemplate.html',
-	    controller:'loginController'
+	  .when('/login', {
+	    templateUrl:'/templates/loginTemplate.html'
 	  })
-	  .when('/myevent',{
+	  .when('/myevent', {
 	    templateUrl:'/templates/myEventTemplate.html'
 	  })
-	  .when('/usertemplate',{
-	    templateUrl:'/templates/usertemplate.html',
-	    controller:'userEventController'
+	  .when('/usertemplate', {
+	    templateUrl:'/templates/usertemplate.html'
 	  })
 		.otherwise({
 			redirectTo: '/'
@@ -29463,17 +29461,16 @@
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('EventController', ['$scope','$http',function($scope, $http){
+	  app.controller('loginController', ['$scope','$http',function($scope, $http){
 	    var refresh = function(){
-	      $http.get('/:user/events/:event').success(function(response){
+	      $http.post('/login').success(function(response){
 	        console.log('Got some data');
 	        console.log(response);
 	        $scope.posts = response;
 	        $scope.post ='';
 	      });
 	    };
-	    refresh();
-	      
+
 	  }]);
 	};
 
@@ -29484,53 +29481,9 @@
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('postingController', ['$scope','$http',function($scope, $http){
-	    var refresh = function(){
-	      $http.get('/articles').success(function(response){
-	        console.log('Got some data');
-	        console.log(response);
-	        $scope.posts = response;
-	        $scope.post ='';
-	      });
-	    };
-	    refresh();
-	      $scope.destroy = function(id) {
-	    		console.log(id);
-	    		$http.delete('/articles/' + id).success(function(response) {
-	    			refresh();
-	    		});
-	    	};
-	      refresh();
-	      $scope.newArticle = function(article){
-	        console.log("This is what you pass in "+ article);
-	        $http.post('/articles', article).success(function(response){
-	          refresh();
-	        });
-	      };
-	      refresh();
-	      $scope.edit = function (post) {
-	          post.editing = true;
-	          console.log('edit post'+ post);
-	      };
-	      $scope.update = function (post){
-	        $http.put('/articles/' + post._id, post).success(function(response){
-	          post.edit = false;
-	        });
-	      }
-	      refresh();
-	  }]);
-	};
-
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-	'use strict';
-	module.exports = function(app){
 	  app.controller('userEventController', ['$scope','$http',function($scope, $http){
 	    var refresh = function(){
-	      $http.get('/:user/events').success(function(response){
+	      $http.get('/login').success(function(response){
 	        console.log('Got some data');
 	        console.log(response);
 	        console.log('testing');
@@ -29560,6 +29513,27 @@
 	      // refresh();
 	  }]);
 	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	// 'use strict';
+	// module.exports = function(app){
+	//   app.controller('EventController', ['$scope','$http',function($scope, $http){
+	//     var refresh = function(){
+	//       $http.get('/:user/events/:event').success(function(response){
+	//         console.log('Got some data');
+	//         console.log(response);
+	//         $scope.posts = response;
+	//         $scope.post ='';
+	//       });
+	//     };
+	//     refresh();
+	//
+	//   }]);
+	// };
 
 
 /***/ }

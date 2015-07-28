@@ -6,7 +6,7 @@ require('angular-route/angular-route');
 var eventFunder = angular.module('eventFunder', ['ngRoute']);
 
 //controllers
-require("./controllers/EventController.js")(eventFunder);
+// require("./controllers/EventController.js")(eventFunder);
 require("./controllers/loginController.js")(eventFunder);
 require("./controllers/userEventController.js")(eventFunder);
 
@@ -17,16 +17,14 @@ eventFunder.config(['$routeProvider', function($routeProvider) {
 		templateUrl: '/templates/eventTemplate.html',
 		controller: 'EventController'
 	})
-  .when('/login',{
-    templateUrl:'/templates/loginTemplate.html',
-    controller:'loginController'
+  .when('/login', {
+    templateUrl:'/templates/loginTemplate.html'
   })
-  .when('/myevent',{
+  .when('/myevent', {
     templateUrl:'/templates/myEventTemplate.html'
   })
-  .when('/usertemplate',{
-    templateUrl:'/templates/usertemplate.html',
-    controller:'userEventController'
+  .when('/usertemplate', {
+    templateUrl:'/templates/usertemplate.html'
   })
 	.otherwise({
 		redirectTo: '/'
