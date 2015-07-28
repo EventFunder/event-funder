@@ -11,10 +11,12 @@ $gama:rgb(101,109,242);//bright blue
 }
 
 header{
-  border-bottom: 1px solid $alpha;
+  margin: $padding 0;
+  border-bottom: 1px solid $charlie;
 }
 h1, h2{
   text-align: center;
+  font-size: 2em;
 }
 h2{
   margin: 0 32%;
@@ -35,6 +37,7 @@ a{
   width: 30%;
   margin: 0 auto;
   text-align: center;
+  text-decoration:none;
   @include center;
   padding: $padding;
   background: $alpha;
@@ -56,6 +59,7 @@ p{
   padding-right: $padding;
   text-align: center;
   margin: $padding 4%;
+  font-size: 1.5em;
 }
 section {
   margin: 5%;
@@ -64,17 +68,29 @@ section {
   border-radius: 10px;
 }
 input{
+  width:22%;
   @include center;
   line-height: 18px;
+  margin-bottom: .5%;
 }
 footer{
   border-top: 1px solid black;
+  color:grey;
 }
 #login{
   background: $bravo;
   margin: 44%;
   display: none;
 }
-#createEvent{
-
+// #main p{
+//   font-size: 1.5em;
+// }
+// .hidden{
+//   display: none;
+// }
+footer p{
+  font-size: 1em;
+}
+header h1{
+  text-align: left;
 }

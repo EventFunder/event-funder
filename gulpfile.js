@@ -40,6 +40,8 @@ gulp.task('copy', function() {
     .pipe(minifyHTML(opts))
     .pipe(gulp.dest('./public/'));
 });
-
+gulp.task('copy:watch', function () {
+  gulp.watch('./frontend/app/**/*.scss', ['copy']);
+});
 gulp.task('build', ['copy','sass']);
 gulp.task('default', ['build']);
