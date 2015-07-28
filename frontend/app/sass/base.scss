@@ -9,7 +9,6 @@ $gama:rgb(101,109,242);//bright blue
   margin-left: auto;
   margin-right: auto;
 }
-
 header{
   margin: $padding 0;
   border-bottom: 1px solid $charlie;
@@ -28,6 +27,7 @@ h2{
 }
 img{
   @include center;
+  padding-bottom: 1%;
 }
 fieldset{
   border: 0 none;
@@ -62,7 +62,7 @@ p{
   font-size: 1.5em;
 }
 section {
-  margin: 5%;
+  margin: 0 6.5%;
   // border: 1px solid black;
   background: $bravo;
   border-radius: 10px;
@@ -82,9 +82,18 @@ footer{
   margin: 44%;
   display: none;
 }
-// #main p{
-//   font-size: 1.5em;
-// }
+.login{
+  width: auto;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+header input{
+  margin-left: 95%;
+}
 // .hidden{
 //   display: none;
 // }

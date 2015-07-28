@@ -15,11 +15,11 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-  gulp.watch('./frontend/app/sass/**/*.scss', ['sass']);
+  gulp.watch('./frontend/app/sass/**/*.sass', ['sass']);
 });
 
 gulp.task('webpackdev', function() {
-  return gulp.src('app/js/**/*.js')
+  return gulp.src('./frontend/app/js/**/*.js')
     .pipe(webpack({
       output: {
         filename: 'bundle.js'
@@ -27,6 +27,9 @@ gulp.task('webpackdev', function() {
     }))
     // .pipe(uglify())
     .pipe(gulp.dest('public/'));
+});
+gulp.task('webpackdev:watch', function () {
+  gulp.watch('./frontend/app/**/*.js', ['webpackdev']);
 });
 
 gulp.task('copy', function() {
@@ -40,8 +43,10 @@ gulp.task('copy', function() {
     .pipe(minifyHTML(opts))
     .pipe(gulp.dest('./public/'));
 });
+
 gulp.task('copy:watch', function () {
-  gulp.watch('./frontend/app/**/*.scss', ['copy']);
+  gulp.watch('./frontend/app/**/*.html', ['copy']);
 });
-gulp.task('build', ['copy','sass']);
+
+gulp.task('build', ['copy','webpackdev','sass','sass:watch','copy:watch', 'webpackdev:watch']);
 gulp.task('default', ['build']);

@@ -4,11 +4,13 @@
   "description": "This is app is an event planning application that will allow the user to host an event and get financial commitments from the attendees",
   "main": "index.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "start": "nodemon server.js"
   },
   "author": "Vi Dang, Farhad Ahmed, Andre Dinh",
   "license": "BSD-2-Clause",
   "devDependencies": {
+    "angular": "^1.4.3",
     "chai": "~3.2.0",
     "chai-http": "~1.0.0",
     "gulp": "^3.9.0",
@@ -20,5 +22,9 @@
     "gulp-webpack": "^1.5.0",
     "jshint": "~2.8.0",
     "mocha": "~2.2.5"
+  },
+  "dependencies": {
+    "angular-route": "^1.4.3",
+    "express": "^4.13.1"
   }
 }
