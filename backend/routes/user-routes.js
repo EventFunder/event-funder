@@ -1,4 +1,6 @@
 var bodyParser = require('body-parser');
+var verify = require('../middleware/verify');
+var User = require('../models/User');
 
 
 module.exports = function(router) {
@@ -9,7 +11,11 @@ module.exports = function(router) {
   }
 
   router.route('/:user')
-    .get(successRes);
+    .get(verify, function(req, res) {
+      User.findOne({username: req.username}, function(err, user) {
+        res.json(user);
+      });
+    });
 
   router.route('/:user/events')
     .get(successRes)
