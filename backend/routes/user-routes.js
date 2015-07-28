@@ -10,6 +10,15 @@ module.exports = function(router) {
     res.json({'msg': 'route successfully reached'});
   }
 
+  router.route('/users')
+    .get(function (req, res) {
+      User.find({}, function(err, users) {
+       if(err) return res.status(500).json({'msg': 'server err yo'});
+       res.send(users);
+      });
+    });
+
+
   router.route('/:user')
     .get(verify, function(req, res) {
       User.findOne({username: req.username}, function(err, user) {
