@@ -11,3 +11,6 @@ var eventSchema = new Schema({
   amtRaised: {type: Number, required: 'Event date required'},
   commits: {type: Schema.Types.ObjectId, ref: 'Committer'}
 });
+
+
+module.exports = mongoose.model('Event', eventSchema);

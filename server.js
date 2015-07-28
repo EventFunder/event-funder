@@ -12,6 +12,7 @@ mongoose.connect('mongodb://localhost/event-funder-users');
 
 
 var userRouter = express.Router();
+require(__dirname + '/backend/routes/authentication-route')(userRouter);
 require(__dirname + '/backend/routes/index-route')(userRouter);
 require(__dirname + '/backend/routes/user-routes')(userRouter);
 app.use('/', userRouter);
