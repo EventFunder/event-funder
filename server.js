@@ -1,24 +1,30 @@
 'use strict'
-//application setup
+
 var express = require('express');
-var path = require('path');
 var app = express();
-var port = 3000;
+var path = require('path');
+var mongoose = require('mongoose');
+var port = process.env.PORT || 3000;
 
+process.env.MONGOLAB_URI = require('./mongoconfig.js')();
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
 
+//router
 app.use(express.static(path.join(__dirname, '/public')));
+//app.get('/', function(req, res) {  // '/' is GET route, then callback function for get
+//  res.render('index');
+//});
 
-// require('./routes/route.js')(app);
+var userRouter = express.Router();
+require(__dirname + '/backend/routes/authentication-route')(userRouter);
+require(__dirname + '/backend/routes/index-route')(userRouter);
+require(__dirname + '/backend/routes/user-routes')(userRouter);
+app.use('/', userRouter);
 
-//view setup
-app.set('views', path.join(__dirname, 'views'));
-
-app.get('/', function(req, res) {  // '/' is GET route, then callback function for get
-  res.render('index');
+app.all('*', function(req, res) {
+  res.status(404).json({'msg': '404 error, you done fucked up son'});
 });
-//view engine setup
-// app.set('view engine', 'jade');
 
-app.listen(port, function(){
-  console.log('server running on ' + port);
-});
+app.listen(port, function() {
+  console.log('Server listening at port: ' + port);
+})

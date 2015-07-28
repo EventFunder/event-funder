@@ -1,5 +1,5 @@
 node_modules
 .DS_Store
 gulpfile.js
-server.js
-package.json
+mongoconfig.js
+config.js
