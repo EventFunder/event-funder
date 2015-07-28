@@ -2,16 +2,18 @@
 
 var express = require('express');
 var app = express();
-// var mongoose = require('mongoose');
-
+var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/event-funder-users');
 
+// process.env.MONGOLAB_URI = require('./mongoconfig.js')();
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/event-funder-users');
+mongoose.connect('mongodb://localhost/event-funder-users');
 //router
 
 
 var userRouter = express.Router();
-require('./backend/routes/user-routes')(userRouter);
+require(__dirname + '/backend/routes/index-route')(userRouter);
+require(__dirname + '/backend/routes/user-routes')(userRouter);
 app.use('/', userRouter);
 
 app.all('*', function(req, res) {

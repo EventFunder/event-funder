@@ -8,10 +8,6 @@ module.exports = function(router) {
     res.json({'msg': 'route successfully reached'});
   }
 
-  router.route('/')
-    .get(successRes)
-    .post(successRes);
-
   router.route('/:user')
     .get(successRes);
 
