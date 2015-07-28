@@ -2,11 +2,13 @@ var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var User = require('../models/User');
 
+
+
 module.exports = function(req, res, next) {
 
   var token = req.body.token || req.query.token;
   if(token) {
-    jwt.verify(token, 'saltyballs', function(err, decoded) {
+    jwt.verify(token, process.env.SECRET, function(err, decoded) {
       if (err) {
         res.status(500).json({msg:'failed to verify User'})
        } else {
