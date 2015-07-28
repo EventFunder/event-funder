@@ -9,7 +9,8 @@ var eventSchema = new Schema({
   description: {type: String, required: 'Event date required'},
   cost: {type: Number, required: 'Event date required'},
   amtRaised: {type: Number, required: 'Event date required'},
-  commits: {type: Schema.Types.ObjectId, ref: 'Committer'}
+  owner: {type: Schema.Types.ObjectId, ref: 'User'}
+  // commits: {type: Schema.Types.ObjectId, ref: 'Committer'}
 });
 
 
