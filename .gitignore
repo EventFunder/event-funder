@@ -1,2 +1,3 @@
 node_modules
-mongoconfig.js
+config.js
+gulpfile.js

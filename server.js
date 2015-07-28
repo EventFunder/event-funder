@@ -5,8 +5,11 @@ var app = express();
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
-process.env.MONGOLAB_URI = require('./mongoconfig.js')();
+process.env.MONGOLAB_URI = require('./config.js').mongolabUri();
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
+
+
+process.env.SECRET = require('./config.js').secret();
 
 //router
 
