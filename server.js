@@ -6,8 +6,8 @@ var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
 // process.env.MONGOLAB_URI = require('./mongoconfig.js')();
-// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/event-funder-users');
-mongoose.connect('mongodb://localhost/event-funder-users');
+// mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
+mongoose.connect('mongodb://localhost/eventfunder-users');
 //router
 
 
