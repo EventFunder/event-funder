@@ -1,7 +1,8 @@
-// 'use strict'
+'use strict'
 
 var express = require('express');
 var app = express();
+var path = require('path');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
@@ -9,7 +10,10 @@ process.env.MONGOLAB_URI = require('./mongoconfig.js')();
 mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
 
 //router
-
+app.use(express.static(path.join(__dirname, '/public')));
+//app.get('/', function(req, res) {  // '/' is GET route, then callback function for get
+//  res.render('index');
+//});
 
 var userRouter = express.Router();
 require(__dirname + '/backend/routes/authentication-route')(userRouter);

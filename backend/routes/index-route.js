@@ -13,10 +13,11 @@ module.exports = function(router) {
 
   router.route('/')
     .get(function (req, res) {
-      User.find({}, function(err, users) {
-        if(err) return res.status(500).json({'msg': 'server err yo'});
-        res.send(users);
-      });
+      //User.find({}, function(err, users) {
+      //  if(err) return res.status(500).json({'msg': 'server err yo'});
+      //  res.send(users);
+      res.render('index');
+      //});
     })
     .post(function(req, res) {
       var user = new User(req.body);

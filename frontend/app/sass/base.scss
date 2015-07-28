@@ -1,0 +1,104 @@
+$padding:2%;
+$alpha: rgb(99,166,159);//blue
+$bravo: rgb(242,225,172);//tan
+$charlie:rgb(242,131,107);//red
+$gama:rgb(101,109,242);//bright blue
+
+@mixin center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header{
+  margin: $padding 0;
+  border-bottom: 1px solid $charlie;
+}
+h1, h2{
+  text-align: center;
+  font-size: 2em;
+}
+h2{
+  margin: 0 32%;
+  border-radius: 20px;
+  background: $alpha;
+}
+#EventsPage h2:hover {
+  background: $charlie;
+}
+img{
+  @include center;
+  padding-bottom: 1%;
+  max-width: 100%;
+}
+fieldset{
+  border: 0 none;
+  padding: $padding;
+}
+a{
+  width: 30%;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration:none;
+  @include center;
+  padding: $padding;
+  background: $alpha;
+}
+a:nth-child(even) {
+    background: $charlie;
+}
+a:hover{
+  background: $gama;
+}
+label{
+  @include center;
+}
+textarea{
+  @include center;
+}
+p{
+  padding-left: $padding;
+  padding-right: $padding;
+  text-align: center;
+  margin: $padding 4%;
+  font-size: 1.5em;
+}
+section {
+  margin: 0 6.5%;
+  // border: 1px solid black;
+  background: $bravo;
+  border-radius: 10px;
+}
+input{
+  width:22%;
+  @include center;
+  line-height: 18px;
+  margin-bottom: .5%;
+}
+footer{
+  border-top: 1px solid black;
+  color:grey;
+}
+#login{
+  background: $bravo;
+  margin: 44%;
+}
+.login{
+  width: auto;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-content: flex-start;
+  align-items: flex-start;
+}
+header input{
+  margin-left: 95%;
+}
+
+footer p{
+  font-size: 1em;
+}
+header h1{
+  text-align: left;
+}
