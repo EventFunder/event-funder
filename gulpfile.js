@@ -8,6 +8,7 @@ var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
+var stylish = require('jshint-stylish')
 
 gulp.task('default', ['test', 'lint'],function() {});
 
@@ -25,7 +26,7 @@ gulp.task('test', function() {
 gulp.task('jshint', function() {
   return gulp.src(['./backend/routes/*.js'])
              .pipe(jshint())
-             .pipe(jshint.reporter('default'));
+             .pipe(jshint.reporter(stylish));
 });
 
 gulp.task('sass', function () {
