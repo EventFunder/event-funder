@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 var mocha = require('gulp-mocha');
-var jshint = require('jshint');
+var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
@@ -16,10 +16,16 @@ gulp.task('test', function() {
       .pipe(mocha());
 });
 
-gulp.task('lint', function() {
-  gulp.src('*.js')
-      .pipe(jshint())
-      .pipe(jshint.reporter('default'));
+// gulp.task('lint', function() {
+//   return gulp.src(['*.js', './backend/test/*.js'])
+//       .pipe(jshint())
+//       .pipe(jshint.reporter('default'));
+// });
+
+gulp.task('jshint', function() {
+  return gulp.src(['./backend/routes/*.js'])
+             .pipe(jshint())
+             .pipe(jshint.reporter('default'));
 });
 
 gulp.task('sass', function () {
