@@ -9,6 +9,4 @@ var committerSchema = new Schema({
   eventToAttend: {type: Schema.Types.ObjectId, ref: 'Event'}
 });
 
-//type: String, required: 'Need to attend an event'
-
 module.exports = mongoose.model('Committer', committerSchema);

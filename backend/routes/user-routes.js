@@ -32,6 +32,6 @@ module.exports = function(router) {
     .post(require('./user-functions/user-events-event-committers-post'));
 
   router.route('/:user/events/:event/committers/:committer')
-    // .get(verify, require('./user-functions/user-events-event-committers-committer-get'))
+    .get(require('./user-functions/user-events-event-committers-committer-get'))
     .delete(verify, require('./user-functions/user-events-event-committers-committer-delete'));
 }

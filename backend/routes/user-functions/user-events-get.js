@@ -6,7 +6,6 @@ module.exports = function(req, res) {
       res.status(500).json({msg: 'Server error: could not get events'});
     } else {
       res.json({msg: 'Events array recieved', events: events});
-      console.log(events[0]);
     }
   });
 }
