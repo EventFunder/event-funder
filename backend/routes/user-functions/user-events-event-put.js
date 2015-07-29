@@ -22,7 +22,7 @@ module.exports = function (req, res) {
 
     var newEvent = eventData.getUpdatedEventObj(req);
 
-    Event.findOneAndUpdate(eventId, {$set:newEvent}, function(err, data) {
+    Event.findByIdAndUpdate(eventId, {$set:newEvent}, function(err, data) {
       if(err) {
         res.status(500).json({msg:'Server error: cannot update event'});
       } else {
