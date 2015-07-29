@@ -8,20 +8,8 @@ var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
-var stylish = require('jshint-stylish')
+var stylish = require('jshint-stylish');
 
-//gulp.task('default', ['test', 'jshint'],function() {});
-
-//gulp.task('test', function() {
-//  gulp.src('./backend/tests/test.js')
-//      .pipe(mocha());
-//});
-
-gulp.task('jshint', function() {
-  return gulp.src(['*.js','./backend/**/*.js', './backend/routes/user-functions/*.js'])
-             .pipe(jshint())
-             .pipe(jshint.reporter(stylish));
-});
 
 gulp.task('sass', function () {
   gulp.src('./frontend/app/sass/**/*.scss')
