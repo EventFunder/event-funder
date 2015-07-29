@@ -10,6 +10,7 @@ module.exports = function(router) {
 
       User.findOne({username: req.body.username}, function(err, user) {
         if(err) return res.status(500).json({msg: 'server err'});
+        if(!user) return res.status(404).json({msg: 'Username not found'});
 
         user.checkpassword(req.body.password)
           ? res.json({msg: 'Token aquired!', token: user.generateToken()})

@@ -14,5 +14,14 @@ var eventSchema = new Schema({
   // commits: {type: Schema.Types.ObjectId, ref: 'Committer'}
 });
 
+eventSchema.methods.getUpdatedEventObj = function (req) {
+
+  return {
+    name:req.body.name || this.name,
+    date:req.body.date || this.date,
+    description: req.body.description || this.description,
+    cost: req.body.cost || this.cost
+  }
+}
 
 module.exports = mongoose.model('Event', eventSchema);
