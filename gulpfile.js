@@ -24,7 +24,7 @@ gulp.task('test', function() {
 // });
 
 gulp.task('jshint', function() {
-  return gulp.src(['./backend/routes/*.js'])
+  return gulp.src(['*.js','./backend/**/*.js', './backend/routes/user-functions/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter(stylish));
 });
