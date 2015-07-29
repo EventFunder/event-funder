@@ -4,6 +4,7 @@ module.exports = function (req, res) {
 
   var eventId = req.params.event;
 
+  //check to see if user owns this event
   Event.findById(eventId, function(err, eventData) {
     if(err) {
       res.status(500).json({msg: 'Server error: cannot find event'});
