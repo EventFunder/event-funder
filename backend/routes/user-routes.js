@@ -1,14 +1,10 @@
 var bodyParser = require('body-parser');
 var verify = require('../middleware/verify');
 var User = require('../models/User');
-
+var Event = require('../models/Event')
 
 module.exports = function(router) {
   router.use(bodyParser.json());
-
-  function successRes(req, res) {
-    res.json({'msg': 'route successfully reached'});
-  }
 
   router.route('/users')
     .get(function (req, res) {
@@ -20,26 +16,22 @@ module.exports = function(router) {
 
 
   router.route('/:user')
-    .get(verify, function(req, res) {
-      User.findOne({username: req.username}, function(err, user) {
-        res.json(user);
-      });
-    });
+    .get(verify, require('./user-functions/user-get'));
 
   router.route('/:user/events')
-    .get(successRes)
-    .post(successRes);
+    .get(verify, require('./user-functions/user-events-get'))
+    .post(verify, require('./user-functions/user-events-post'));
 
   router.route('/:user/events/:event')
-    .get(successRes)
-    .put(successRes)
-    .delete(successRes);
+    .get(require('./user-functions/user-events-event-get'))
+    .put(verify, require('./user-functions/user-events-event-put'))
+    .delete(verify, require('./user-functions/user-events-event-delete'));
 
   router.route('/:user/events/:event/committers')
-    .get(successRes)
-    .post(successRes);
+    .get(require('./user-functions/user-events-event-committers-get'))
+    .post(require('./user-functions/user-events-event-committers-post'));
 
   router.route('/:user/events/:event/committers/:committer')
-    .get(successRes)
-    .delete(successRes);
+    // .get(verify, require('./user-functions/user-events-event-committers-committer-get'))
+    .delete(verify, require('./user-functions/user-events-event-committers-committer-delete'));
 }
