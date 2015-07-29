@@ -9,16 +9,15 @@ module.exports = function (req, res) {
       res.status(500).json({msg: 'Server error: cannot find event'});
     } else {
       if(eventData.owner === req.username) {
-        updateEvent(eventData, req);
+        updateEvent(eventData, eventId, req);
       } else {
         res.status(403).json({msg: 'You are not authorized to update this file'});
       }
     }
   })
 
-  //There is a wierd bug here that will assign a different event's items to empty fields
 
-  function updateEvent(eventData, req) {
+  function updateEvent(eventData, eventId, req) {
 
     var newEvent = eventData.getUpdatedEventObj(req);
 

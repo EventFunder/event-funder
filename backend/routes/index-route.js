@@ -18,7 +18,7 @@ module.exports = function(router) {
       var user = new User(req.body);
       user.password = user.generateHash(req.body.password);
       user.save(function(err) {
-        if(err) return res.status(500).json({msg: 'server err yo'});
+        if(err) return res.status(500).json({msg: 'Server Error: cannot save user'});
         res.json({msg: 'user done been created'});
       });
     });

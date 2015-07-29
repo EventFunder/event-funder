@@ -6,7 +6,7 @@ var User = require('../models/User');
 
 module.exports = function(req, res, next) {
 
-  var token = req.body.token || req.query.token;
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if(token) {
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
       if (err) {
@@ -18,7 +18,7 @@ module.exports = function(req, res, next) {
             console.error(err);
             res.status(500).json({msg: "internal server err: failted to handle request"});
           } else {
-            console.log('data found by user.findone in very:\n', user)
+            console.log('data found by user.findone in verify:\n', user)
 
             req.username = user.username;
             next();
