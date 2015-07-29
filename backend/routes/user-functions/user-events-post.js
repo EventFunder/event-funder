@@ -7,7 +7,7 @@ module.exports = function(req, res) {
     date: req.body.date,
     description: req.body.description,
     cost: req.body.cost,
-    amtRaised: req.body.amtRaised,
+    amtRaised: 0,
     owner: req.username
   });
   eventPost.save(function(err) {
