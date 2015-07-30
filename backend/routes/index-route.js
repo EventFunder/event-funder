@@ -14,12 +14,13 @@ module.exports = function(router) {
     .get(function (req, res) {
       res.render('index');
     })
+    //create user
     .post(function(req, res) {
       var user = new User(req.body);
       user.password = user.generateHash(req.body.password);
       user.save(function(err) {
-        if(err) return res.status(500).json({msg: 'Server Error: cannot save user'});
-        res.json({msg: 'user done been created'});
+        if(err) res.status(500).json({msg: 'Server Error: cannot save user'});
+        res.json({msg: 'user done been created', token:user.generateToken()});
       });
     });
 }
