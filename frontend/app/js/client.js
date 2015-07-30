@@ -7,7 +7,7 @@ require('angular-cookies/angular-cookies');
 var eventFunder = angular.module('eventFunder', ['ngRoute','ngCookies']);
 
 //controllers
-// require("./controllers/EventController.js")(eventFunder);
+require("./controllers/CreateEventController.js")(eventFunder);
 require('./controllers/CreateNewUserController.js')(eventFunder);
 require("./controllers/EventController.js")(eventFunder);
 require("./controllers/loginController.js")(eventFunder);
