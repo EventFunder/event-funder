@@ -1,163 +1,81 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var expect = chai.expect;
 var mongoose = require('mongoose');
+var expect = chai.expect;
 
+var token;
+var batID;
 
-process.env.MONGOLAB_URL = 'mongodb://localhost/test';
-require(__dirname + '/../server.js');
+require(__dirname + '/../../server.js');
 chai.use(chaiHttp);
 
-/*describe('server test with a single rest resource', function() {
+describe('server test with a single rest resource', function() {
   //before all test, create dummy data in test server
-  before(function(done) {
-      var game = new Game({"name": "Dummy Name", "genre": "dumb", "rating": "3"});
-      game.key = game.name.replace(/\s+/g, '').toLowerCase();
-      game.save();
-      done();
-  });
+  //before(function(done) {
+  //    var batman = new User({"username": "batman", "password": "becauseimbatman"});
+  //    //game.key = game.name.replace(/\s+/g, '').toLowerCase();
+  //    batman.save();
+  //    done();
+  //});
 
-  //clear test server after all tests
+  //clear test database after all tests
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
       done();
     });
   });
-
-  it('should respond with a 404 when given a bad route', function(done) {
+  //User tests
+  it('will post a new user to users collection', function(done) {
     chai.request('http://localhost:3000')
-        .get('/blah')
+        .post('/')
+        .send({"username": "batman", "password": "becauseimbatman"})
         .end(function(err, res) {
-          expect(res).to.have.status(404);
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200)
           done();
         });
   });
-
-  describe('get request', function() {
-    it('should respond to a get request', function(done) {
-      chai.request('http://localhost:3000')
-        .get('/games')
-        .end(function(err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
-          done();
-        });
-    });
-
-    it('should get an array of resources', function(done) {
-      chai.request('http://localhost:3000')
-        .get('/games')
-        .end(function(err, res) {
-            expect(res.body).to.be.an('array');
-            expect(res.body[0].key).to.eql('dummyname');
-            expect(res.body[0].name).to.eql('Dummy Name');
-            done();
-        });
-    });
-
-    it('should respond to a get request with an id', function(done) {
+  it('will get batman from users collection', function(done) {
     chai.request('http://localhost:3000')
-        .get('/games/dummyname')
+        .get('/users')
         .end(function(err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          expect(err).to.eql(null);
+          expect(typeof res.body).to.eql('object');
           done();
         });
-    });
-
-    it('should get single resource with an id', function(done) {
-      chai.request('http://localhost:3000')
-        .get('/games/dummyname')
-        .end(function(err, res) {
-            expect(res.body).to.be.an('object');
-            expect(res.body.key).to.eql('dummyname');
-            expect(res.body.name).to.eql('Dummy Name');
-            done();
-        });
-    });
   });
-
-
-  describe('post route', function() {
-    it('should respond to a post request', function(done) {
+  it('will authenticate batman', function(done) {
     chai.request('http://localhost:3000')
-        .post('/games')
-        .send({"name": "Dummy Post", "genre": "post", "rating": "5"})
+        .post('/auth')
+        .send({"username": "batman", "password": "becauseimbatman"})
         .end(function(err, res) {
-          expect(err).to.be.null;
-          expect(res).to.have.status(200);
+          token = res.body.token;
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200)
           done();
         });
-    });
-
-    it('should post to the database', function(done) {
+  });
+  it('will post batman\'s event', function(done) {
     chai.request('http://localhost:3000')
-        .post('/games')
-        .send({"name": "Dummy Post 2", "genre": "post", "rating": "10"})
+        .post('/users/events')
+        .send({"name": "Wayne Manor Partay", "date": "7/29/2015",
+               "description": "Party like its 1999", "cost": "1000000",
+               "token": token})
         .end(function(err, res) {
-          expect(res.body).to.eql({'msg': 'posted to /games/ route', 'key': "dummypost2"});
-          done();
-        });
-    });
-  });
-
-  describe('put route', function() {
-    it('should respond to a put request', function(done) {
-      chai.request('http://localhost:3000')
-        .put('/games/dummyname')
-        .send({"rating": "9"})
-        .end(function(err, res) {
-          expect(err).to.be.null;
+          expect(err).to.eql(null);
           expect(res).to.have.status(200);
           done();
         });
-    });
-
-    it('should update the document', function(done) {
-      chai.request('http://localhost:3000')
-        .put('/games/dummyname')
-        .send({"rating": "8"})
-        .end(function(err, res) {
-          expect(res.body).to.be.eql({"msg": "update succeeded!"});
-          Game.findOne({key:"dummyname"}, function(err, data) {
-            if (err) throw err;
-            expect(data.rating).to.be.eql(8);
-            done();
-          });
-        });
-    });
   });
-
-  describe('delete route', function() {
-    beforeEach(function(done) {
-      var game = new Game({"name": "Dummy Data delete", "genre": "dumb", "rating": "1"});
-      game.key = game.name.replace(/\s+/g, '').toLowerCase();
-      game.save();
-      done();
-    });
-
-    it('should respond to a delete request', function(done) {
-      chai.request('http://localhost:3000')
-        .delete('/games/dummydatadelete')
+  it('will get batman\'s event', function(done) {
+    chai.request('http://localhost:3000')
+        .get('/users/events')
+        .send({"token": token})
         .end(function(err, res) {
-          expect(err).to.be.null;
+          expect(err).to.eql(null);
           expect(res).to.have.status(200);
           done();
-      });
-    });
-
-    it('should delete document', function(done) {
-      chai.request('http://localhost:3000')
-        .delete('/games/dummydatadelete')
-        .end(function(err, res) {
-          expect(res.body).to.eql({'msg': 'deleted /games/dummydatadelete route'});
-          Game.findOne({key:"dummydatadelete"}, function(err, data) {
-            if (err) throw err;
-            expect(data).to.be.null;
-            done();
-          });
-      });
-    });
+        });
   });
 });
-*/
+
