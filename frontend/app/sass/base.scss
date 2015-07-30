@@ -10,13 +10,11 @@ $gama:rgb(101,109,242);//bright blue
   margin-right: auto;
 }
 
-header{
-  margin: $padding 0;
-  border-bottom: 1px solid $charlie;
-}
+
 h1, h2{
   text-align: center;
   font-size: 2em;
+  width: 49%;
 }
 h2{
   margin: 0 32%;
@@ -40,19 +38,18 @@ a{
   margin: 0 auto;
   text-align: center;
   text-decoration:none;
-  @include center;
   padding: $padding;
-  background: $alpha;
+  // background: $alpha;
+  border-radius: 20px;
 }
+
 a:nth-child(even) {
     background: $charlie;
 }
 a:hover{
   background: $gama;
 }
-label{
-  @include center;
-}
+
 textarea{
   @include center;
 }
@@ -70,7 +67,6 @@ section {
   border-radius: 10px;
 }
 input{
-  @include center;
   line-height: 18px;
   margin-bottom: .5%;
 }
@@ -78,14 +74,9 @@ footer{
   border-top: 1px solid black;
   color:grey;
 }
-.login{
-  width: auto;
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: flex-start;
-  align-items: flex-start;
+#login{
+  width: 15%;
+  background-size: 20%;
 }
 header input{
   margin-left: 95%;
@@ -96,4 +87,7 @@ footer p{
 }
 header h1{
   text-align: left;
+}
+#mainHead{
+  @include center;
 }

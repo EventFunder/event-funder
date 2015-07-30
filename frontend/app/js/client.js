@@ -33,5 +33,9 @@ eventFunder.config(['$routeProvider', function($routeProvider) {
 	.when('/newAccount', {
     templateUrl:'/templates/CreateUserTemplate.html'
   })
+	.when('/:event',{
+		templateUrl:'/templates/showEvent.html',
+		controller:'EventController'
+	})
 
 }]);
