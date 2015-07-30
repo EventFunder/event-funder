@@ -73,8 +73,7 @@
 	eventFunder.config(['$routeProvider', function($routeProvider) {
 		$routeProvider
 		.when('/event', {
-			templateUrl: '/templates/eventTemplate.html',
-			controller: 'EventController'
+			templateUrl: '/templates/eventTemplate.html'
 		})
 	  .when('/login', {
 	    templateUrl:'/templates/loginTemplate.html'
@@ -83,7 +82,10 @@
 	    templateUrl:'/templates/myEventTemplate.html'
 	  })
 	  .when('/showEvent', {
-	    templateUrl:'/templates/showAllEvent.html'
+	    templateUrl:'/templates/showEvent.html'
+	  })
+		.when('/showAllMyEvent', {
+	    templateUrl:'/templates/showAllMyEvent.html'
 	  })
 		.when('/newAccount', {
 	    templateUrl:'/templates/CreateUserTemplate.html'
@@ -29812,17 +29814,19 @@
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('EventController', ['$scope','$http',function($scope, $http){
+	  app.controller('EventController', ['$scope','$http','$cookies', function($scope, $http, $cookies){
 
-	    var eventNumber = function(){
-	      $http.get('/andre/events/55b815ec0bcef07d21866faa').success(function(response){
+	    $scope.getEvents = function(){
+	      var responseKey = $cookies.get('response');
+	      console.log(responseKey);
+	      // $http.defaults.headers.common['x-access-token'] = responseKey;
+	      $http.get('/user/events/').success(function(response){
 	        console.log('Got some data');
 	        console.log(response);
 	        $scope.event = response;
-	        // $scope.event ='';
+	        $scope.event ='';
 	      });
 	    };
-	    eventNumber();
 
 	  }]);
 	};
@@ -29839,22 +29843,13 @@
 	      console.log(user.username);
 	      console.log(user.password);
 	      $http.post('/auth', user).success(function(response){
-	        // var responseCookie = $cookies.put('response',response);
-	        // var responseKey = $cookies.get('response');
-	        // console.log(responseKey);
-	        console.log('Got some data');
-	        console.log(response);
-	        $scope.posts = response;
-	        $scope.post ='';
-	        // $location.url('/usertemplate');
+	        var responseCookie = $cookies.put('response',response.token);
+	        var responseKey = $cookies.get('response');
+	        $http.defaults.headers.common['x-access-token'] = responseKey;
+	        console.log("this is your cookie please don't lose it "+ responseKey);
+	        $location.path('/showAllMyEvent');
 	      });
 	    };
-	    // $scope.submit = function(user){
-	    //     console.log("This is what you pass in "+ user);
-	    //     $http.post('/auth', user).success(function(response){
-	    //       refresh();
-	    //     });
-	    //   };
 	  }]);
 	};
 

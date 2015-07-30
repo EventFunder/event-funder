@@ -16,8 +16,7 @@ require("./controllers/loginController.js")(eventFunder);
 eventFunder.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 	.when('/event', {
-		templateUrl: '/templates/eventTemplate.html',
-		controller: 'EventController'
+		templateUrl: '/templates/eventTemplate.html'
 	})
   .when('/login', {
     templateUrl:'/templates/loginTemplate.html'
@@ -26,7 +25,10 @@ eventFunder.config(['$routeProvider', function($routeProvider) {
     templateUrl:'/templates/myEventTemplate.html'
   })
   .when('/showEvent', {
-    templateUrl:'/templates/showAllEvent.html'
+    templateUrl:'/templates/showEvent.html'
+  })
+	.when('/showAllMyEvent', {
+    templateUrl:'/templates/showAllMyEvent.html'
   })
 	.when('/newAccount', {
     templateUrl:'/templates/CreateUserTemplate.html'
