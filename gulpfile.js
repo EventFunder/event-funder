@@ -52,7 +52,7 @@ gulp.task('copy:watch', function () {
   gulp.watch('./frontend/app/**/*.html', ['copy']);
 });
 
-gulp.task('build', ['copy','webpackdev','sass','sass:watch','copy:watch', 'webpackdev:watch']);
+gulp.task('build', ['copy','webpackdev','sass']);
 
 
 //gulp.task('watch', function() {

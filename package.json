@@ -26,6 +26,7 @@
     "mocha": "~2.2.5"
   },
   "dependencies": {
+    "angular-cookies": "^1.4.3",
     "angular-route": "^1.4.3",
     "bcrypt": "^0.8.4",
     "body-parser": "~1.13.2",

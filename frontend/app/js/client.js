@@ -2,8 +2,9 @@
 
 require('angular/angular');
 require('angular-route/angular-route');
+require('angular-cookies/angular-cookies');
 
-var eventFunder = angular.module('eventFunder', ['ngRoute']);
+var eventFunder = angular.module('eventFunder', ['ngRoute','ngCookies']);
 
 //controllers
 // require("./controllers/EventController.js")(eventFunder);

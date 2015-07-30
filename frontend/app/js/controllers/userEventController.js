@@ -2,7 +2,7 @@
 module.exports = function(app){
   app.controller('userEventController', ['$scope','$http',function($scope, $http){
     var refresh = function(){
-      $http.get('/login').success(function(response){
+      $http.get('/user').success(function(response){
         console.log('Got some data');
         console.log(response);
         console.log('testing');
