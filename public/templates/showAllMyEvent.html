@@ -1,1 +1,1 @@
-<section id=EventsPage data-ng-controller=EventController data-ng-init=getEvents()><h2>Create a new event</h2><h1>My Events</h1><div data-ng-repeat="event in events"><a href=#>{{event.name}}</a></div></section>
+<section id=EventsPage data-ng-controller=EventController data-ng-init=getEvents()><h2>Create a new event</h2><h1>My Events</h1><div data-ng-repeat="event in events"><a data-ng-click=eventLink(event)>{{event.name}}</a></div></section>

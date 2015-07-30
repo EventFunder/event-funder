@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(2);
+	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
 	module.exports = __webpack_require__(8);
@@ -57,17 +57,17 @@
 
 	'use strict';
 
+	__webpack_require__(2);
 	__webpack_require__(3);
 	__webpack_require__(4);
-	__webpack_require__(5);
 
 	var eventFunder = angular.module('eventFunder', ['ngRoute','ngCookies']);
 
 	//controllers
-	// require("./controllers/EventController.js")(eventFunder);
-	__webpack_require__(2)(eventFunder);
+	__webpack_require__(5)(eventFunder);
 	__webpack_require__(6)(eventFunder);
 	__webpack_require__(7)(eventFunder);
+	__webpack_require__(8)(eventFunder);
 
 	//routing
 	eventFunder.config(['$routeProvider', function($routeProvider) {
@@ -96,26 +96,6 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	'use strict'
-
-	module.exports = function(app){
-	  app.controller('CreateNewUserController', ['$scope','$http', function($scope, $http){
-	    $scope.submit = function(user){
-	      console.log(user.username);
-	      console.log(user.password);
-	      $http.post('/', user).success(function(response){
-	        console.log("This is what you pass in " + user);
-	        console.log('you made account');
-	      });
-	    };
-	  }]);
-	};
-
-
-/***/ },
-/* 3 */
 /***/ function(module, exports) {
 
 	/**
@@ -28484,7 +28464,7 @@
 	!window.angular.$$csp() && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 	/**
@@ -29482,7 +29462,7 @@
 
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 	/**
@@ -29809,33 +29789,94 @@
 
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('EventController', ['$scope','$http','$cookies', function($scope, $http, $cookies){
+	  app.controller('CreateEventController', ['$scope','$http','$cookies',function($scope, $http,$cookies){
 
-	    $scope.getEvents = function(){
+	    $scope.submit = function(event){
+	      console.log("my events name " + event.name);
+	      console.log("my events date " + event.date);
 	      var responseKey = $cookies.get('response');
-	      console.log(responseKey);
-	      // $http.defaults.headers.common['x-access-token'] = responseKey;
-	      $http.get('/user/events/').success(function(response){
-	        // console.log('Got some data');
-	        // console.log(response);
-	        $scope.events = response.events;
-	        // console.log('response.events ' + response.events);
-	        // console.log('response.events[0] '+ response.events[0].name);
-	        $scope.event ='';
+	      $http.post('/user/events', event).success(function(response){
+	        console.log('Created a event!!');
+
+	      });
+	    }
+	  }]);
+	};
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict'
+
+	module.exports = function(app){
+	  app.controller('CreateNewUserController', ['$scope','$http','$location', function($scope, $http, $location){
+	    $scope.submit = function(user){
+	      console.log(user.username);
+	      console.log(user.password);
+	      $http.post('/', user).success(function(response){
+	        console.log("This is what you pass in " + user);
+	        console.log('you made account');
+	        $location.path('/login');
 	      });
 	    };
-
 	  }]);
 	};
 
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+	module.exports = function(app){
+	  app.controller('EventController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
+	    $scope.getEvents = function(){
+	      var responseKey = $cookies.get('response');
+	      console.log(responseKey);
+	      // $http.defaults.headers.common['x-access-token'] = responseKey;
+	      $http.get('/user/events/').success(function(response){
+	        $scope.events = response.events;
+	        $scope.event ='';
+	      });
+	    };
+
+	    $scope.eventLink = function(event){
+	      // console.log(event._id);
+	      $cookies.put('eventId',event._id);
+	      // var eventIdCookie = $cookies.get('eventId');
+	      // console.log("This is my cookie don't eat it " + eventIdCookie);
+	      $location.path('/showEvent');
+	    };
+
+	    $scope.getEvent = function(event){
+	      var eventId = $cookies.get('eventId');
+	      $http.get('/user/events/'+ eventId).success(function(response){
+	        console.log(response.name);
+	        $scope.event = response;
+	        // $scope.event ='';
+	      });
+	    };
+	    $scope.delete = function(event){
+	      var eventId = $cookies.get('eventId');
+	      $http.delete('/user/events/'+ eventId).success(function(response){
+	        console.log('you deleted your this event!!!!!!!!!!!');
+	        $location.path('/showAllMyEvent');
+	      });
+	    }
+
+	  }]);
+	};
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -29852,46 +29893,6 @@
 	        $location.path('/showAllMyEvent');
 	      });
 	    };
-	  }]);
-	};
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-	module.exports = function(app){
-	  app.controller('userEventController', ['$scope','$http',function($scope, $http){
-	    var refresh = function(){
-	      $http.get('/user').success(function(response){
-	        console.log('Got some data');
-	        console.log(response);
-	        console.log('testing');
-	        $scope.events = response;
-	        $scope.event ='';
-	      });
-	    };
-	    refresh();
-
-	      // refresh();
-	      // $scope.newArticle = function(article){
-	      //   console.log("This is what you pass in "+ article);
-	      //   $http.post('/articles', article).success(function(response){
-	      //     refresh();
-	      //   });
-	      // };
-	      // refresh();
-	      // $scope.edit = function (post) {
-	      //     post.editing = true;
-	      //     console.log('edit post'+ post);
-	      // };
-	      // $scope.update = function (post){
-	      //   $http.put('/articles/' + post._id, post).success(function(response){
-	      //     post.edit = false;
-	      //   });
-	      // }
-	      // refresh();
 	  }]);
 	};
 

@@ -1,20 +1,39 @@
 'use strict';
 module.exports = function(app){
-  app.controller('EventController', ['$scope','$http','$cookies', function($scope, $http, $cookies){
-
+  app.controller('EventController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
     $scope.getEvents = function(){
       var responseKey = $cookies.get('response');
       console.log(responseKey);
       // $http.defaults.headers.common['x-access-token'] = responseKey;
       $http.get('/user/events/').success(function(response){
-        // console.log('Got some data');
-        // console.log(response);
         $scope.events = response.events;
-        // console.log('response.events ' + response.events);
-        // console.log('response.events[0] '+ response.events[0].name);
         $scope.event ='';
       });
     };
+
+    $scope.eventLink = function(event){
+      // console.log(event._id);
+      $cookies.put('eventId',event._id);
+      // var eventIdCookie = $cookies.get('eventId');
+      // console.log("This is my cookie don't eat it " + eventIdCookie);
+      $location.path('/showEvent');
+    };
+
+    $scope.getEvent = function(event){
+      var eventId = $cookies.get('eventId');
+      $http.get('/user/events/'+ eventId).success(function(response){
+        console.log(response.name);
+        $scope.event = response;
+        // $scope.event ='';
+      });
+    };
+    $scope.delete = function(event){
+      var eventId = $cookies.get('eventId');
+      $http.delete('/user/events/'+ eventId).success(function(response){
+        console.log('you deleted your this event!!!!!!!!!!!');
+        $location.path('/showAllMyEvent');
+      });
+    }
 
   }]);
 };
