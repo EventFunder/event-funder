@@ -1,11 +1,27 @@
 'use strict';
 
 var gulp = require('gulp');
+var mocha = require('gulp-mocha');
+var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
+var stylish = require('jshint-stylish')
+
+gulp.task('default', ['jshint'],function() {});
+
+gulp.task('jshint', function() {
+  return gulp.src(['*.js','./backend/**/*.js', './backend/routes/user-functions/*.js'])
+             .pipe(jshint())
+             .pipe(jshint.reporter(stylish));
+});
+
+gulp.task('test', function() {
+  return gulp.src('./backend/tests/test.js')
+      .pipe(mocha( { reporter: 'nyan' } ));
+});
 
 gulp.task('sass', function () {
   gulp.src('./frontend/app/sass/**/*.scss')
@@ -50,3 +66,7 @@ gulp.task('copy:watch', function () {
 
 gulp.task('build', ['copy','webpackdev','sass','sass:watch','copy:watch', 'webpackdev:watch']);
 gulp.task('default', ['build']);
+
+gulp.task('watch', function() {
+  gulp.watch('*.js', ['jshint']);
+});
