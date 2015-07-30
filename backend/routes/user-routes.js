@@ -1,7 +1,8 @@
 var bodyParser = require('body-parser');
 var verify = require('../middleware/verify');
 var User = require('../models/User');
-var Event = require('../models/Event')
+var Event = require('../models/Event');
+var Committer = require('../models/Committer');
 
 module.exports = function(router) {
   router.use(bodyParser.json());
@@ -9,11 +10,10 @@ module.exports = function(router) {
   router.route('/users')
     .get(function (req, res) {
       User.find({}, function(err, users) {
-       if(err) return res.status(500).json({'msg': 'server err yo'});
-       res.send(users);
+       if(err) res.status(500).json({'msg': 'server err yo'});
+       else res.send(users);
       });
     });
-
 
   router.route('/:user')
     .get(verify, require('./user-functions/user-get'));
@@ -34,4 +34,5 @@ module.exports = function(router) {
   router.route('/:user/events/:event/committers/:committer')
     .get(require('./user-functions/user-events-event-committers-committer-get'))
     .delete(verify, require('./user-functions/user-events-event-committers-committer-delete'));
+
 }
