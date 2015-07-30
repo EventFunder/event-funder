@@ -37,6 +37,15 @@ describe('server test with a single rest resource', function() {
           done();
         });
   });
+  it('will get batman from users collection', function(done) {
+    chai.request('http://localhost:3000')
+        .get('/users')
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          //expect(typeof res.body).to.eql('object');
+          done();
+        });
+  });
 
   //it('should respond with a 404 when given a bad route', function(done) {
   //  chai.request('http://localhost:3000')
