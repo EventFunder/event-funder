@@ -9,15 +9,14 @@ var eventFunder = angular.module('eventFunder', ['ngRoute','ngCookies']);
 //controllers
 // require("./controllers/EventController.js")(eventFunder);
 require('./controllers/CreateNewUserController.js')(eventFunder);
-// require("./controllers/loginController.js")(eventFunder);
-// require("./controllers/userEventController.js")(eventFunder);
+require("./controllers/EventController.js")(eventFunder);
+require("./controllers/loginController.js")(eventFunder);
 
 //routing
 eventFunder.config(['$routeProvider', function($routeProvider) {
 	$routeProvider
 	.when('/event', {
-		templateUrl: '/templates/eventTemplate.html',
-		controller: 'EventController'
+		templateUrl: '/templates/eventTemplate.html'
 	})
   .when('/login', {
     templateUrl:'/templates/loginTemplate.html'
@@ -25,8 +24,11 @@ eventFunder.config(['$routeProvider', function($routeProvider) {
   .when('/myevent', {
     templateUrl:'/templates/myEventTemplate.html'
   })
-  .when('/usertemplate', {
-    templateUrl:'/templates/usertemplate.html'
+  .when('/showEvent', {
+    templateUrl:'/templates/showEvent.html'
+  })
+	.when('/showAllMyEvent', {
+    templateUrl:'/templates/showAllMyEvent.html'
   })
 	.when('/newAccount', {
     templateUrl:'/templates/CreateUserTemplate.html'

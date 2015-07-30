@@ -1,11 +1,12 @@
-<section id="login"  data-ng-controller="CreateNewUserController" data-ng-init="Refresh()" data-ng-submit="submit(user)">
-  <form method="post">
+<section id="login"  data-ng-controller="loginController">
+  <form method="post" data-ng-submit="refresh(user)">
     <fieldset>
+      <h1>Login</h1>
       <label for="username">Username</label>
-      <input type="text" name="username" data-ng-model="user.username" required>
+      <input type="text" name="username" data-ng-model="user.username">
       <label for="password">Password</label>
-      <input type="password" name="password" data-ng-model="user.password" required>
-      <button type="button" name="button" >Submit</button>
+      <input type="password" name="password" data-ng-model="user.password">
+      <button type="submit" name="button">Submit</button>
     </fieldset>
   </form>
 </section>
