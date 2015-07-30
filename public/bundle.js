@@ -45,9 +45,10 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(7);
 	__webpack_require__(5);
-	module.exports = __webpack_require__(6);
+	__webpack_require__(6);
+	__webpack_require__(7);
+	module.exports = __webpack_require__(8);
 
 
 /***/ },
@@ -58,14 +59,15 @@
 
 	__webpack_require__(2);
 	__webpack_require__(3);
-	__webpack_require__(4)
+	__webpack_require__(4);
 
 	var eventFunder = angular.module('eventFunder', ['ngRoute','ngCookies']);
 
 	//controllers
 	// require("./controllers/EventController.js")(eventFunder);
 	__webpack_require__(5)(eventFunder);
-	__webpack_require__(6)(eventFunder);
+	// require("./controllers/loginController.js")(eventFunder);
+	// require("./controllers/userEventController.js")(eventFunder);
 
 	//routing
 	eventFunder.config(['$routeProvider', function($routeProvider) {
@@ -83,9 +85,10 @@
 	  .when('/usertemplate', {
 	    templateUrl:'/templates/usertemplate.html'
 	  })
-		.otherwise({
-			redirectTo: '/'
-		});
+		.when('/newAccount', {
+	    templateUrl:'/templates/CreateUserTemplate.html'
+	  })
+
 	}]);
 
 
@@ -29787,28 +29790,18 @@
 /* 5 */
 /***/ function(module, exports) {
 
-	'use strict';
-	module.exports = function(app){
-	  app.controller('loginController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
-	    var refresh = function(){
+	'use strict'
 
-	      $http.post('/user').success(function(response){
-	        var response = $cookies.put('response',response);
-	        responseCookie = $cookies.get(response);
-	        consle.log(responseCookie)
-	        console.log('Got some data');
-	        console.log(response);
-	        $scope.posts = response;
-	        $scope.post ='';
-	        $location.url('/usertemplate');
+	module.exports = function(app){
+	  app.controller('CreateNewUserController', ['$scope','$http', function($scope, $http){
+	    $scope.submit = function(user){
+	      console.log(user.username);
+	      console.log(user.password);
+	      $http.post('/', user).success(function(response){
+	        console.log("This is what you pass in " + user);
+	        console.log('you made account');
 	      });
 	    };
-	    $scope.submit = function(user){
-	        console.log("This is what you pass in "+ user);
-	        $http.post('/auth', user).success(function(response){
-	          refresh();
-	        });
-	      };
 	  }]);
 	};
 
@@ -29817,11 +29810,62 @@
 /* 6 */
 /***/ function(module, exports) {
 
+	// 'use strict';
+	// module.exports = function(app){
+	//   app.controller('EventController', ['$scope','$http',function($scope, $http){
+	//     var refresh = function(){
+	//       $http.get('/:user/events/:event').success(function(response){
+	//         console.log('Got some data');
+	//         console.log(response);
+	//         $scope.posts = response;
+	//         $scope.post ='';
+	//       });
+	//     };
+	//     refresh();
+	//
+	//   }]);
+	// };
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	// 'use strict';
+	// module.exports = function(app){
+	//   app.controller('loginController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
+	//     var refresh = function(){
+	//
+	//       $http.post('/user').success(function(response){
+	//         var response = $cookies.put('response',response);
+	//         responseCookie = $cookies.get(response);
+	//         consle.log(responseCookie)
+	//         console.log('Got some data');
+	//         console.log(response);
+	//         $scope.posts = response;
+	//         $scope.post ='';
+	//         $location.url('/usertemplate');
+	//       });
+	//     };
+	//     $scope.submit = function(user){
+	//         console.log("This is what you pass in "+ user);
+	//         $http.post('/auth', user).success(function(response){
+	//           refresh();
+	//         });
+	//       };
+	//   }]);
+	// };
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
 	'use strict';
 	module.exports = function(app){
 	  app.controller('userEventController', ['$scope','$http',function($scope, $http){
 	    var refresh = function(){
-	      $http.get('/login').success(function(response){
+	      $http.get('/user').success(function(response){
 	        console.log('Got some data');
 	        console.log(response);
 	        console.log('testing');
@@ -29851,27 +29895,6 @@
 	      // refresh();
 	  }]);
 	};
-
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	// 'use strict';
-	// module.exports = function(app){
-	//   app.controller('EventController', ['$scope','$http',function($scope, $http){
-	//     var refresh = function(){
-	//       $http.get('/:user/events/:event').success(function(response){
-	//         console.log('Got some data');
-	//         console.log(response);
-	//         $scope.posts = response;
-	//         $scope.post ='';
-	//       });
-	//     };
-	//     refresh();
-	//
-	//   }]);
-	// };
 
 
 /***/ }

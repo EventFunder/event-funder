@@ -1,15 +1,11 @@
 'use strict';
 
 var gulp = require('gulp');
-var mocha = require('gulp-mocha');
-var jshint = require('gulp-jshint');
 var sass = require('gulp-sass');
 var webpack = require('gulp-webpack');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var minifyHTML = require('gulp-minify-html');
-var stylish = require('jshint-stylish');
-
 
 gulp.task('sass', function () {
   gulp.src('./frontend/app/sass/**/*.scss')
@@ -19,7 +15,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-  gulp.watch('./frontend/app/sass/**/*.scss', ['sass']);
+  gulp.watch('./frontend/app/sass/**/*.sass', ['sass']);
 });
 
 gulp.task('webpackdev', function() {
@@ -52,9 +48,5 @@ gulp.task('copy:watch', function () {
   gulp.watch('./frontend/app/**/*.html', ['copy']);
 });
 
-gulp.task('build', ['copy','webpackdev','sass']);
-
-
-//gulp.task('watch', function() {
-//  gulp.watch('*.js', ['test', 'jshint']);
-//});
+gulp.task('build', ['copy','webpackdev','sass','sass:watch','copy:watch', 'webpackdev:watch']);
+gulp.task('default', ['build']);
