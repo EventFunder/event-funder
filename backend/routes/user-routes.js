@@ -19,7 +19,7 @@ module.exports = function(router) {
     .get(verify, require('./user-functions/user-get'));
 
   router.route('/:user/events')
-    .get(verify, require('./user-functions/user-events-get'))
+    .get( require('./user-functions/user-events-get'))//took out verfiy
     .post(verify, require('./user-functions/user-events-post'));
 
   router.route('/:user/events/:event')

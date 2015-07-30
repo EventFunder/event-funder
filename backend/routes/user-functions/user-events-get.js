@@ -1,7 +1,9 @@
 var Event = require('../../models/Event');
 
 module.exports = function(req, res) {
-  Event.find({owner: req.username}, function(err, events) {
+  var user = req.params.user;
+
+  Event.find({owner: user}, function(err, events) {
     if(err) {
       res.status(500).json({msg: 'Server error: could not get events'});
     } else {
