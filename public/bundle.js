@@ -29846,15 +29846,13 @@
 	        $scope.event ='';
 	      });
 	    };
-	    $scope.eventLink =function(event){
-	      var responseKey = $cookies.get('response');
-	      $http.get('/user/events/').success(function(response){
-	        $scope.events = response.events._id;
-	        console.log(response.events[this]._id);
-	        $scope.event ='';
-	      });
 
-	    }
+	    $scope.eventLink =function(event){
+	      // console.log(event._id);
+	      $cookies.put('eventId',event._id);
+	      var eventIdCookie = $cookies.get('eventId');
+	      console.log("THis is my cookie don't eat it " + eventIdCookie);
+	      };
 
 	  }]);
 	};
