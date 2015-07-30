@@ -29863,6 +29863,13 @@
 	        // $scope.event ='';
 	      });
 	    };
+	    $scope.delete = function(event){
+	      var eventId = $cookies.get('eventId');
+	      $http.delete('/user/events/'+ eventId).success(function(response){
+	        console.log('you deleted your this event!!!!!!!!!!!');
+	        $location.path('/showAllMyEvent');
+	      });
+	    }
 
 	  }]);
 	};
