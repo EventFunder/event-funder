@@ -3,13 +3,11 @@ var chaiHttp = require('chai-http');
 var mongoose = require('mongoose');
 var expect = chai.expect;
 
+var token;
+var batID;
+
 require(__dirname + '/../../server.js');
-//process.env.MONGOLAB_URI = 'mongodb://localhost/data';
 chai.use(chaiHttp);
-
-//process.env.MONGOLAB_URI = require('./config.js').mongolabUri();
-//mongoose.connect(process.env.MONGOLAB_URI); //|| 'mongodb://localhost/eventfunder-users');
-
 
 describe('server test with a single rest resource', function() {
   //before all test, create dummy data in test server
@@ -20,13 +18,13 @@ describe('server test with a single rest resource', function() {
   //    done();
   //});
 
-  ////clear test server after all tests
+  //clear test database after all tests
   after(function(done) {
     mongoose.connection.db.dropDatabase(function() {
       done();
     });
   });
-
+  //User tests
   it('will post a new user to users collection', function(done) {
     chai.request('http://localhost:3000')
         .post('/')
@@ -42,145 +40,42 @@ describe('server test with a single rest resource', function() {
         .get('/users')
         .end(function(err, res) {
           expect(err).to.eql(null);
-          //expect(typeof res.body).to.eql('object');
+          expect(typeof res.body).to.eql('object');
           done();
         });
   });
-
-  //it('should respond with a 404 when given a bad route', function(done) {
-  //  chai.request('http://localhost:3000')
-  //      .get('/blah')
-  //      .end(function(err, res) {
-  //        expect(res).to.have.status(404);
-  //        done();
-  //      });
-  //});
-//
-  //describe('get request', function() {
-  //  it('should respond to a get request', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .get('/games')
-  //      .end(function(err, res) {
-  //        expect(err).to.be.null;
-  //        expect(res).to.have.status(200);
-  //        done();
-  //      });
-  //  });
-//
-  //  it('should get an array of resources', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .get('/games')
-  //      .end(function(err, res) {
-  //          expect(res.body).to.be.an('array');
-  //          expect(res.body[0].key).to.eql('dummyname');
-  //          expect(res.body[0].name).to.eql('Dummy Name');
-  //          done();
-  //      });
-  //  });
-//
-  //  it('should respond to a get request with an id', function(done) {
-  //  chai.request('http://localhost:3000')
-  //      .get('/games/dummyname')
-  //      .end(function(err, res) {
-  //        expect(err).to.be.null;
-  //        expect(res).to.have.status(200);
-  //        done();
-  //      });
-  //  });
-//
-  //  it('should get single resource with an id', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .get('/games/dummyname')
-  //      .end(function(err, res) {
-  //          expect(res.body).to.be.an('object');
-  //          expect(res.body.key).to.eql('dummyname');
-  //          expect(res.body.name).to.eql('Dummy Name');
-  //          done();
-  //      });
-  //  });
-  //});
-//
-//
-  //describe('post route', function() {
-  //  it('should respond to a post request', function(done) {
-  //  chai.request('http://localhost:3000')
-  //      .post('/games')
-  //      .send({"name": "Dummy Post", "genre": "post", "rating": "5"})
-  //      .end(function(err, res) {
-  //        expect(err).to.be.null;
-  //        expect(res).to.have.status(200);
-  //        done();
-  //      });
-  //  });
-//
-  //  it('should post to the database', function(done) {
-  //  chai.request('http://localhost:3000')
-  //      .post('/games')
-  //      .send({"name": "Dummy Post 2", "genre": "post", "rating": "10"})
-  //      .end(function(err, res) {
-  //        expect(res.body).to.eql({'msg': 'posted to /games/ route', 'key': "dummypost2"});
-  //        done();
-  //      });
-  //  });
-  //});
-//
-  //describe('put route', function() {
-  //  it('should respond to a put request', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .put('/games/dummyname')
-  //      .send({"rating": "9"})
-  //      .end(function(err, res) {
-  //        expect(err).to.be.null;
-  //        expect(res).to.have.status(200);
-  //        done();
-  //      });
-  //  });
-//
-  //  it('should update the document', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .put('/games/dummyname')
-  //      .send({"rating": "8"})
-  //      .end(function(err, res) {
-  //        expect(res.body).to.be.eql({"msg": "update succeeded!"});
-  //        Game.findOne({key:"dummyname"}, function(err, data) {
-  //          if (err) throw err;
-  //          expect(data.rating).to.be.eql(8);
-  //          done();
-  //        });
-  //      });
-  //  });
-  //});
-//
-  //describe('delete route', function() {
-  //  beforeEach(function(done) {
-  //    var game = new Game({"name": "Dummy Data delete", "genre": "dumb", "rating": "1"});
-  //    game.key = game.name.replace(/\s+/g, '').toLowerCase();
-  //    game.save();
-  //    done();
-  //  });
-//
-  //  it('should respond to a delete request', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .delete('/games/dummydatadelete')
-  //      .end(function(err, res) {
-  //        expect(err).to.be.null;
-  //        expect(res).to.have.status(200);
-  //        done();
-  //    });
-  //  });
-//
-  //  it('should delete document', function(done) {
-  //    chai.request('http://localhost:3000')
-  //      .delete('/games/dummydatadelete')
-  //      .end(function(err, res) {
-  //        expect(res.body).to.eql({'msg': 'deleted /games/dummydatadelete route'});
-  //        Game.findOne({key:"dummydatadelete"}, function(err, data) {
-  //          if (err) throw err;
-  //          expect(data).to.be.null;
-  //          done();
-  //        });
-  //    });
-  //  });
-  //});
+  it('will authenticate batman', function(done) {
+    chai.request('http://localhost:3000')
+        .post('/auth')
+        .send({"username": "batman", "password": "becauseimbatman"})
+        .end(function(err, res) {
+          token = res.body.token;
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200)
+          done();
+        });
+  });
+  it('will post batman\'s event', function(done) {
+    chai.request('http://localhost:3000')
+        .post('/users/events')
+        .send({"name": "Wayne Manor Partay", "date": "7/29/2015",
+               "description": "Party like its 1999", "cost": "1000000",
+               "token": token})
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          done();
+        });
+  });
+  it('will get batman\'s event', function(done) {
+    chai.request('http://localhost:3000')
+        .get('/users/events')
+        .send({"token": token})
+        .end(function(err, res) {
+          expect(err).to.eql(null);
+          expect(res).to.have.status(200);
+          done();
+        });
+  });
 });
 
