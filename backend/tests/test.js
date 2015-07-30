@@ -18,12 +18,12 @@ describe('server test with a single rest resource', function() {
   //    done();
   //});
 
-  //clear test database after all tests
-  after(function(done) {
-    mongoose.connection.db.dropDatabase(function() {
-      done();
-    });
-  });
+  ////clear test database after all tests
+  //after(function(done) {
+  //  mongoose.connection.db.dropDatabase(function() {
+  //    done();
+  //  });
+  //});
   //User tests
   it('will post a new user to users collection', function(done) {
     chai.request('http://localhost:3000')
