@@ -41,15 +41,18 @@ module.exports = function(app){
         console.log("committers " + response.committers[0].name);
         $scope.committers = response.committers;
         $scope.committer = '';
+        $location.path('/showEvent');
       });
       $scope.addCommiter = function(){
-        $location.path('/events/:event');
+        var eventId = $routeParams.event || $cookies.get('eventId');
+        $location.path('/events/' + eventId + '/committers');
       }
     }
     $scope.joinCommiter = function(user){
       var eventId = $routeParams.event || $cookies.get('eventId');
       $http.post('/user/events/'+ eventId + '/committers', user).success(function(response){
         console.log("you are joined!");
+        $location.path('/events/'+ eventId + '/');
       });
     }
 
