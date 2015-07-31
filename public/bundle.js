@@ -90,8 +90,12 @@
 		.when('/newAccount', {
 	    templateUrl:'/templates/CreateUserTemplate.html'
 	  })
-		.when('/events/:event',{
+		.when('/events/:event/committers',{
 			templateUrl:'/templates/joinTemplate.html',
+			controller:'EventController'
+		})
+		.when('/events/:event/',{
+			templateUrl:'/templates/showEvent.html',
 			controller:'EventController'
 		})
 
@@ -29798,7 +29802,7 @@
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('CreateEventController', ['$scope','$http','$cookies',function($scope, $http,$cookies){
+	  app.controller('CreateEventController', ['$scope','$http','$cookies','$location',function($scope, $http,$cookies,$location){
 
 	    $scope.submit = function(event){
 	      console.log("my events name " + event.name);
@@ -29806,6 +29810,7 @@
 	      var responseKey = $cookies.get('response');
 	      $http.post('/user/events', event).success(function(response){
 	        console.log('Created a event!!');
+	        $location.path('/showAllMyEvent');
 
 	      });
 	    }
@@ -29881,15 +29886,18 @@
 	        console.log("committers " + response.committers[0].name);
 	        $scope.committers = response.committers;
 	        $scope.committer = '';
+	        $location.path('/showEvent');
 	      });
 	      $scope.addCommiter = function(){
-	        $location.path('/events/:event');
+	        var eventId = $routeParams.event || $cookies.get('eventId');
+	        $location.path('/events/' + eventId + '/committers');
 	      }
 	    }
 	    $scope.joinCommiter = function(user){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.post('/user/events/'+ eventId + '/committers', user).success(function(response){
 	        console.log("you are joined!");
+	        $location.path('/events/'+ eventId + '/');
 	      });
 	    }
 
