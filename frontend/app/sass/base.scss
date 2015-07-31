@@ -6,20 +6,34 @@ $gama:rgb(101,109,242);//bright blue
 
 @mixin center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  text-align: center;
 }
-
 
 h1, h2{
+  @include center;
   text-align: center;
   font-size: 2em;
-  width: 49%;
 }
 h2{
-  margin: 0 32%;
   border-radius: 20px;
   background: $alpha;
+}
+.loginbtn{
+  text-decoration:none;
+  padding: $padding;
+  // background: $alpha;
+  border-radius: 20px;
+  float: right;
+  clear:both;
+}
+.login--header{
+  display: inline;
+  @include center;
+}
+label{
+  display: block;
+  text-align: center;
 }
 #EventsPage h2:hover {
   background: $charlie;
@@ -34,13 +48,8 @@ fieldset{
   padding: $padding;
 }
 a{
-  width: 30%;
-  margin: 0 auto;
-  text-align: center;
-  text-decoration:none;
-  padding: $padding;
-  // background: $alpha;
-  border-radius: 20px;
+  @include center;
+  margin: 2%;
 }
 
 a:nth-child(even) {
@@ -69,6 +78,7 @@ section {
 input{
   line-height: 18px;
   margin-bottom: .5%;
+  @include center;
 }
 footer{
   border-top: 1px solid black;
@@ -81,7 +91,11 @@ footer{
 header input{
   margin-left: 95%;
 }
-
+button{
+  @include center;
+  margin-top: 1%;
+  width: 11%;
+}
 footer p{
   font-size: 1em;
 }

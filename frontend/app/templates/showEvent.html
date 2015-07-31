@@ -1,12 +1,11 @@
 <section id="EventsPage" data-ng-controller="EventController" data-ng-init="getEvent()">
-  <h2>Create a new event</h2>
-  <h1>My Events</h1>
+  <h1>{{event.name}}</h1>
   <div data-ng-init="showCommitters()">
     <button type="button" name="DESTROY" data-ng-click="delete(event)">Delete Event</button>
     <button type="button" name="join" data-ng-click="">Join</button>
-    <h3>The name of event is {{event.name}}</h3>
+    <!-- <h3> {{event.name}}</h3> -->
     <div data-ng-repeat="committer in committers">
     <p>{{committer.name}}</p>
-    
+
   </div>
 </section>
