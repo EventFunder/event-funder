@@ -1,0 +1,14 @@
+@import "colors";
+@import "mixen";
+#EventsPage h2:hover {
+  background: $charlie;
+}
+
+#EventsPage div{
+  @include center;
+}
+#EventsPage a{
+  font-size: 2.5em;
+  color: yellow;
+  border-bottom: 1px dashed black;
+}

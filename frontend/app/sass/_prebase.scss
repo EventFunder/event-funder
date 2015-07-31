@@ -1,5 +1,50 @@
-$padding:2%;
-$alpha: rgb(99,166,159);//blue
-$bravo: rgb(242,225,172);//tan
-$charlie:rgb(242,131,107);//red
-$gama:rgb(101,109,242);//bright blue
+$padding: 2%;
+@import "colors";
+@import "mixen";
+// h1, h2{
+//   @include center;
+//   text-align: center;
+//   font-size: 2em;
+// }
+h1{
+  font-size: 3em;
+  color:rgb(242, 255, 240);
+}
+h2{
+  // border-radius: 20px;
+  background: $alpha;
+}
+p{
+  padding-left: $padding;
+  padding-right: $padding;
+  text-align: center;
+  font-size: 2.5em;
+  background-color: $bravo;
+}
+// header input{
+//   margin-left: 95%;
+// }
+header h1{
+  text-align: left;
+}
+header{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: $bravo;
+}
+button{
+  @include center;
+  margin-top: 1%;
+  width: 11%;
+}
+footer p{
+  font-size: 1em;
+}
+body{
+  background-color: $gama;
+}
+#mainHead{
+  @include center;
+}

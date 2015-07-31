@@ -14,6 +14,10 @@ module.exports = function(app){
       $cookies.put('eventId',event._id);
       $location.path('/showEvent');
     };
+    $scope.newEvent = function(event){
+      $cookies.get('eventId',event._id);
+      $location.path('/myevent');
+    };
 
     $scope.getEvent = function(event){
       var eventId = $routeParams.event || $cookies.get('eventId');
