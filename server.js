@@ -6,11 +6,14 @@ var path = require('path');
 var mongoose = require('mongoose');
 var port = process.env.PORT || 3000;
 
-process.env.MONGOLAB_URI = require('./config.js').mongolabUri();
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
+var MONGOLAB_URI = process.env.MONGOLAB_URI || require('./config.js').mongolabUri();
+mongoose.connect(MONGOLAB_URI, function(err) {
+  if (err) {console.log('error: ' + err)}
+  else console.log('MongoDB connection successful.');
+} //process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
 
 
-process.env.SECRET = require('./config.js').secret();
+process.env.secret = process.env.SECRET || require('./config.js').secret();
 
 //router
 app.use(express.static(path.join(__dirname, '/public')));
@@ -30,4 +33,5 @@ app.all('*', function(req, res) {
 
 app.listen(port, function() {
   console.log('Server listening at port: ' + port);
+  console.log('Connected to MongoDB: ' + process.env.MONGOLAB_URI);
 })
