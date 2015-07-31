@@ -1,106 +1,12 @@
-$padding:2%;
-$alpha: rgb(48,92,166);
-$bravo: rgb(107,157,242);
-$charlie:rgb(242,198,107);
-$gama:rgb(101,109,242);
-
-@mixin center {
-  display: block;
-  margin: 0 auto;
-  text-align: center;
-}
-
-h1, h2{
-  @include center;
-  text-align: center;
-  font-size: 2em;
-}
-h2{
-  border-radius: 20px;
-  background: $alpha;
-}
-.loginbtn{
-  text-decoration:none;
-  padding: $padding;
-  // background: $alpha;
-  border-radius: 20px;
-  float: right;
-  clear:both;
-}
-.login--header{
-  display: inline;
-  @include center;
-}
-label{
-  display: block;
-  text-align: center;
-}
-#EventsPage h2:hover {
-  background: $charlie;
-}
-img{
-  @include center;
-  padding-bottom: 1%;
-  max-width: 100%;
-}
-fieldset{
-  border: 0 none;
-  padding: $padding;
-}
-a{
-  @include center;
-  margin: 2%;
-}
-
-a:nth-child(even) {
-    background: $gama;
-}
-a:hover{
-  background: $bravo;
-}
-// main{
-//   background-color: rgb(242, 255, 108);
-// }
-textarea{
-  @include center;
-}
-p{
-  padding-left: $padding;
-  padding-right: $padding;
-  text-align: center;
-  margin: $padding 4%;
-  font-size: 1.5em;
-}
-section {
-  margin: 0 6.5%;
-  // border: 1px solid black;
-  background: $bravo;
-  border-radius: 10px;
-}
-input{
-  line-height: 18px;
-  margin-bottom: .5%;
-  @include center;
-}
-
-#login{
-  width: 15%;
-  background-size: 20%;
-}
-header input{
-  margin-left: 95%;
-}
-button{
-  @include center;
-  margin-top: 1%;
-  width: 11%;
-}
-footer p{
-  font-size: 1em;
-}
-header h1{
-  text-align: left;
-}
-#mainHead{
-  @include center;
+@import "prebase";
+@import "colors";
+@import "events";
+@import "forms";
+@import "mixen";
+// @import "login";
+.flex{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

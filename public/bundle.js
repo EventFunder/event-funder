@@ -29854,6 +29854,10 @@
 	      $cookies.put('eventId',event._id);
 	      $location.path('/showEvent');
 	    };
+	    $scope.newEvent = function(event){
+	      $cookies.get('eventId',event._id);
+	      $location.path('/myevent');
+	    };
 
 	    $scope.getEvent = function(event){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
@@ -29889,6 +29893,7 @@
 	      });
 	    }
 
+	    $scope.date = '20140313T00:00:00';
 	  }]);
 	};
 
