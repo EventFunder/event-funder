@@ -8,9 +8,9 @@ var port = process.env.PORT || 3000;
 
 var MONGOLAB_URI = process.env.MONGOLAB_URI // || require('./config.js').mongolabUri();
 mongoose.connect(MONGOLAB_URI, function(err) {
-  if (err) {console.log('error: ' + err)}
+  if (err) console.log('error: ' + err);
   else console.log('MongoDB connection successful.');
-} //process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
+}); //process.env.MONGOLAB_URI || 'mongodb://localhost/eventfunder-users');
 
 
 process.env.secret = process.env.SECRET // || require('./config.js').secret();
