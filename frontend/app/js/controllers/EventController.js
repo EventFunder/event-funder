@@ -4,7 +4,6 @@ module.exports = function(app){
     $scope.getEvents = function(){
       var responseKey = $cookies.get('response');
       console.log(responseKey);
-      // $http.defaults.headers.common['x-access-token'] = responseKey;
       $http.get('/user/events/').success(function(response){
         $scope.events = response.events;
         $scope.event ='';
@@ -12,10 +11,7 @@ module.exports = function(app){
     };
 
     $scope.eventLink = function(event){
-      // console.log(event._id);
       $cookies.put('eventId',event._id);
-      // var eventIdCookie = $cookies.get('eventId');
-      // console.log("This is my cookie don't eat it " + eventIdCookie);
       $location.path('/showEvent');
     };
 
@@ -24,7 +20,7 @@ module.exports = function(app){
       $http.get('/user/events/'+ eventId).success(function(response){
         console.log(response.name);
         $scope.event = response;
-        // $scope.event ='';
+        alert('http://localhost:3000/#/events/'+ eventId);
       });
     };
     $scope.delete = function(event){
@@ -41,12 +37,16 @@ module.exports = function(app){
         console.log("committers " + response.committers[0].name);
         $scope.committers = response.committers;
         $scope.committer = '';
-        alert(eventId);
-        // console.log($location.absUrl());
       });
       $scope.addCommiter = function(){
-        // $location
+        $location.path('/events/:event');
       }
+    }
+    $scope.joinCommiter = function(user){
+      var eventId = $routeParams.event || $cookies.get('eventId');
+      $http.post('/user/events/'+ eventId + '/committers', user).success(function(response){
+        console.log("you are joined!");
+      });
     }
 
   }]);

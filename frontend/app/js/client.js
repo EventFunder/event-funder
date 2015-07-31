@@ -33,8 +33,8 @@ eventFunder.config(['$routeProvider', function($routeProvider) {
 	.when('/newAccount', {
     templateUrl:'/templates/CreateUserTemplate.html'
   })
-	.when('/:event',{
-		templateUrl:'/templates/showEvent.html',
+	.when('/events/:event',{
+		templateUrl:'/templates/joinTemplate.html',
 		controller:'EventController'
 	})
 

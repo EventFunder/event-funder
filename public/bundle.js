@@ -90,8 +90,8 @@
 		.when('/newAccount', {
 	    templateUrl:'/templates/CreateUserTemplate.html'
 	  })
-		.when('/:event',{
-			templateUrl:'/templates/showEvent.html',
+		.when('/events/:event',{
+			templateUrl:'/templates/joinTemplate.html',
 			controller:'EventController'
 		})
 
@@ -29844,7 +29844,6 @@
 	    $scope.getEvents = function(){
 	      var responseKey = $cookies.get('response');
 	      console.log(responseKey);
-	      // $http.defaults.headers.common['x-access-token'] = responseKey;
 	      $http.get('/user/events/').success(function(response){
 	        $scope.events = response.events;
 	        $scope.event ='';
@@ -29852,10 +29851,7 @@
 	    };
 
 	    $scope.eventLink = function(event){
-	      // console.log(event._id);
 	      $cookies.put('eventId',event._id);
-	      // var eventIdCookie = $cookies.get('eventId');
-	      // console.log("This is my cookie don't eat it " + eventIdCookie);
 	      $location.path('/showEvent');
 	    };
 
@@ -29864,7 +29860,7 @@
 	      $http.get('/user/events/'+ eventId).success(function(response){
 	        console.log(response.name);
 	        $scope.event = response;
-	        // $scope.event ='';
+	        alert('http://localhost:3000/#/events/'+ eventId);
 	      });
 	    };
 	    $scope.delete = function(event){
@@ -29881,12 +29877,16 @@
 	        console.log("committers " + response.committers[0].name);
 	        $scope.committers = response.committers;
 	        $scope.committer = '';
-	        alert(eventId);
-	        // console.log($location.absUrl());
 	      });
 	      $scope.addCommiter = function(){
-	        // $location
+	        $location.path('/events/:event');
 	      }
+	    }
+	    $scope.joinCommiter = function(user){
+	      var eventId = $routeParams.event || $cookies.get('eventId');
+	      $http.post('/user/events/'+ eventId + '/committers', user).success(function(response){
+	        console.log("you are joined!");
+	      });
 	    }
 
 	  }]);
@@ -29911,6 +29911,9 @@
 	        $location.path('/showAllMyEvent');
 	      });
 	    };
+	    $scope.createAcount = function(){
+	      $location.path('/newAccount');
+	    }
 	  }]);
 	};
 
