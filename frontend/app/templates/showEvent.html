@@ -1,11 +1,17 @@
 <section id="EventsPage" data-ng-controller="EventController" data-ng-init="getEvent()">
   <h1>{{event.name}}</h1>
-  <div data-ng-init="showCommitters()">
-    <button type="button" name="DESTROY" data-ng-click="delete(event)">Delete Event</button>
-    <button type="button" name="join" data-ng-click="addCommiter()">Join</button>
+    <h4>Goal</h4>
+    <p>{{event.cost | currency}}</p>
+    <h4>Raise</h4>
+    <p>{{event.amtRaised | currency}}</p>
+    <p ng-bind="date | date:'MM/dd/yyyy'">Date: {{event.date}}</p>
+    <p>{{event.description}}</p>
     <!-- <h3> {{event.name}}</h3> -->
-    <div data-ng-repeat="committer in committers">
-    <p>{{committer.name}}</p>
-
-  </div>
+    <p>Commiters</p>
+    <div data-ng-init="showCommitters()" class="flex">
+      <div data-ng-repeat="committer in committers">
+      <p>{{committer.name}} {{committer.amount | currency}}</p>
+    </div>
+  <button type="button" name="DESTROY" data-ng-click="delete(event)">Delete Event</button>
+  <button type="button" name="join" data-ng-click="addCommiter()">Join</button>
 </section>

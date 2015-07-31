@@ -49,5 +49,6 @@ module.exports = function(app){
       });
     }
 
+    $scope.date = '20140313T00:00:00';
   }]);
 };
