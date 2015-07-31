@@ -6,22 +6,34 @@ $gama:rgb(101,109,242);//bright blue
 
 @mixin center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  text-align: center;
 }
 
-header{
-  margin: $padding 0;
-  border-bottom: 1px solid $charlie;
-}
 h1, h2{
+  @include center;
   text-align: center;
   font-size: 2em;
 }
 h2{
-  margin: 0 32%;
   border-radius: 20px;
   background: $alpha;
+}
+.loginbtn{
+  text-decoration:none;
+  padding: $padding;
+  // background: $alpha;
+  border-radius: 20px;
+  float: right;
+  clear:both;
+}
+.login--header{
+  display: inline;
+  @include center;
+}
+label{
+  display: block;
+  text-align: center;
 }
 #EventsPage h2:hover {
   background: $charlie;
@@ -36,23 +48,17 @@ fieldset{
   padding: $padding;
 }
 a{
-  width: 30%;
-  margin: 0 auto;
-  text-align: center;
-  text-decoration:none;
   @include center;
-  padding: $padding;
-  background: $alpha;
+  margin: 2%;
 }
+
 a:nth-child(even) {
     background: $charlie;
 }
 a:hover{
   background: $gama;
 }
-label{
-  @include center;
-}
+
 textarea{
   @include center;
 }
@@ -70,30 +76,32 @@ section {
   border-radius: 10px;
 }
 input{
-  @include center;
   line-height: 18px;
   margin-bottom: .5%;
+  @include center;
 }
 footer{
   border-top: 1px solid black;
   color:grey;
 }
-.login{
-  width: auto;
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  align-content: flex-start;
-  align-items: flex-start;
+#login{
+  width: 15%;
+  background-size: 20%;
 }
 header input{
   margin-left: 95%;
 }
-
+button{
+  @include center;
+  margin-top: 1%;
+  width: 11%;
+}
 footer p{
   font-size: 1em;
 }
 header h1{
   text-align: left;
+}
+#mainHead{
+  @include center;
 }

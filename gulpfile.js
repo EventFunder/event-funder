@@ -31,7 +31,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('sass:watch', function () {
-  gulp.watch('./frontend/app/sass/**/*.sass', ['sass']);
+  gulp.watch('./frontend/app/scss/**/*.scss', ['sass']);
 });
 
 gulp.task('webpackdev', function() {

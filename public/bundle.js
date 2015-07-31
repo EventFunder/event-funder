@@ -90,6 +90,10 @@
 		.when('/newAccount', {
 	    templateUrl:'/templates/CreateUserTemplate.html'
 	  })
+		.when('/:event',{
+			templateUrl:'/templates/showEvent.html',
+			controller:'EventController'
+		})
 
 	}]);
 
@@ -29836,7 +29840,7 @@
 
 	'use strict';
 	module.exports = function(app){
-	  app.controller('EventController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
+	  app.controller('EventController', ['$scope','$http','$cookies','$location','$routeParams', function($scope, $http, $cookies,$location,$routeParams){
 	    $scope.getEvents = function(){
 	      var responseKey = $cookies.get('response');
 	      console.log(responseKey);
@@ -29856,7 +29860,7 @@
 	    };
 
 	    $scope.getEvent = function(event){
-	      var eventId = $cookies.get('eventId');
+	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.get('/user/events/'+ eventId).success(function(response){
 	        console.log(response.name);
 	        $scope.event = response;
@@ -29864,11 +29868,25 @@
 	      });
 	    };
 	    $scope.delete = function(event){
-	      var eventId = $cookies.get('eventId');
+	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.delete('/user/events/'+ eventId).success(function(response){
 	        console.log('you deleted your this event!!!!!!!!!!!');
 	        $location.path('/showAllMyEvent');
 	      });
+	    }
+	    $scope.showCommitters = function(){
+	      var eventId = $routeParams.event || $cookies.get('eventId');
+	      $http.get('/user/events/' + eventId + '/committers').success(function(response){
+	        console.log(eventId);
+	        console.log("committers " + response.committers[0].name);
+	        $scope.committers = response.committers;
+	        $scope.committer = '';
+	        alert(eventId);
+	        // console.log($location.absUrl());
+	      });
+	      $scope.addCommiter = function(){
+	        // $location
+	      }
 	    }
 
 	  }]);
