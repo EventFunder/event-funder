@@ -2,7 +2,7 @@
   <h1>{{event.name}}</h1>
   <div data-ng-init="showCommitters()">
     <button type="button" name="DESTROY" data-ng-click="delete(event)">Delete Event</button>
-    <button type="button" name="join" data-ng-click="">Join</button>
+    <button type="button" name="join" data-ng-click="addCommiter()">Join</button>
     <!-- <h3> {{event.name}}</h3> -->
     <div data-ng-repeat="committer in committers">
     <p>{{committer.name}}</p>

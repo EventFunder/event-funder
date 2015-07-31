@@ -12,5 +12,8 @@ module.exports = function(app){
         $location.path('/showAllMyEvent');
       });
     };
+    $scope.createAcount = function(){
+      $location.path('/newAccount');
+    }
   }]);
 };
