@@ -1,8 +1,8 @@
 $padding:2%;
-$alpha: rgb(99,166,159);//blue
-$bravo: rgb(242,225,172);//tan
-$charlie:rgb(242,131,107);//red
-$gama:rgb(101,109,242);//bright blue
+$alpha: rgb(48,92,166);
+$bravo: rgb(107,157,242);
+$charlie:rgb(242,198,107);
+$gama:rgb(101,109,242);
 
 @mixin center {
   display: block;
@@ -53,12 +53,14 @@ a{
 }
 
 a:nth-child(even) {
-    background: $charlie;
+    background: $gama;
 }
 a:hover{
-  background: $gama;
+  background: $bravo;
 }
-
+// main{
+//   background-color: rgb(242, 255, 108);
+// }
 textarea{
   @include center;
 }
