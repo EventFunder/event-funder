@@ -13,11 +13,18 @@ module.exports = function (req, res) {
   committer.save(function(err) {
     if(err) res.status(500).json({msg: 'Server error: Cannot save committer'});
     else {
-      Event.findByIdAndUpdate(eventId, {$inc: {amtRaised: req.body.amount}}, function(err, data) {
+      Event.findByIdAndUpdate(eventId, {$inc: {amtRaised: req.body.amount}}, function(err, eventData) {
         if (err) res.status(500).json({msg: 'Event amount raised could not be updated'});
-        else res.json({msg: 'Committer has been saved and updated'});
+        else {
+          var funded = (eventData.amtRaised + req.body.amount) >= eventData.cost;
+          res.json({msg: 'Committer has been saved and updated', funded: funded});
+        }
+
+
+
       });
     }
   });
+
 }
 
