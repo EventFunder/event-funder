@@ -4,7 +4,7 @@
   background: $charlie;
 }
 #EventsPage p{
-  background: transparent;
+  padding: $padding;
 }
 #EventsPage div{
   @include center;
