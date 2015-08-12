@@ -11,8 +11,10 @@
 }
 #EventsPage a{
   font-size: 2.5em;
-  color: yellow;
-  border-bottom: 1px dashed black;
+  color: $fontcolor;
+}
+#EventPage a:hover{
+  color:$alpha;
 }
 // h1{
 //   border-bottom: 1px solid black;

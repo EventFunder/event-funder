@@ -5,12 +5,15 @@
       <p>{{event.cost | currency}}</p>
       <h4>Raise</h4>
       <p>{{event.amtRaised | currency}}</p>
-      <p ng-bind="date |  date:'MM/dd/yyyy'">Date: {{event.date}}</p>
+      <h4>Date:</h4>
+      <p>
+        <time>{{event.date}}</time>
+      </p>
       <p>{{event.description}}</p>
       <!-- <h3> {{event.name}}</h3> -->
     </section>
     <div data-ng-init="showCommitters()" class="flex">
-      <p>Commiters</p>
+      <p>Commiters: </p>
       <div data-ng-repeat="committer in committers">
       <p>{{committer.name}} {{committer.amount | currency}}</p>
     </div>
