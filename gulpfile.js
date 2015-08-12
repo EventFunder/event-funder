@@ -49,4 +49,5 @@ gulp.task('copy:watch', function () {
 });
 
 gulp.task('build', ['copy','webpackdev','sass','sass:watch','copy:watch', 'webpackdev:watch']);
+// gulp.task('build',['sass:watch']);
 gulp.task('default', ['build']);
