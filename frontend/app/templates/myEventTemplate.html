@@ -2,13 +2,13 @@
   <form method="post" data-ng-submit="submit(event)">
     <fieldset>
       <h1 data-ng-click="newEvent()">Create new event</h1>
-      <label for="name">Event Name</label>
+      <label for="name">Event Name:</label>
         <input type="text" name="name" data-ng-model="event.name">
-      <label for="cost">Cost</label>
+      <label for="cost">Cost:</label>
         <input type="text" name="cost" data-ng-model="event.cost">
-      <label for="date">Date</label>
+      <label for="date">Date:</label>
         <input type="text" name="date" data-ng-model="event.date">
-      <label for="description">Description</label>
+      <label for="description">Description:</label>
         <textarea name="text" rows="8" cols="40" data-ng-model="event.description"></textarea>
       <button type="Submit">Submit</button>
     </fieldset>
