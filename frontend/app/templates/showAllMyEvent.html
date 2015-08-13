@@ -1,5 +1,5 @@
 <section id="EventsPage" data-ng-controller="EventController" data-ng-init="getEvents()">
-  <h1 class="hover" type="button" data-ng-click="newEvent(event)">Create new Event</h1>
+  <button type="button" data-ng-click="newEvent(event)">Create new Event</button>
   <div data-ng-repeat="event in events">
     <a data-ng-click="eventLink(event)"> {{event.name}}</a>
   </div>
