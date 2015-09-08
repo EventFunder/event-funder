@@ -7,7 +7,7 @@ module.exports = function(app){
       console.log("my events date " + event.date);
       var responseKey = $cookies.get('response');
       $http.post('/user/events', event).success(function(response){
-        console.log('Created a event!!');
+        // console.log('Created a event!!');
         $location.path('/showAllMyEvent');
 
       });

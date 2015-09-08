@@ -29809,7 +29809,7 @@
 	      console.log("my events date " + event.date);
 	      var responseKey = $cookies.get('response');
 	      $http.post('/user/events', event).success(function(response){
-	        console.log('Created a event!!');
+	        // console.log('Created a event!!');
 	        $location.path('/showAllMyEvent');
 
 	      });
@@ -29830,8 +29830,8 @@
 	      console.log(user.username);
 	      console.log(user.password);
 	      $http.post('/', user).success(function(response){
-	        console.log("This is what you pass in " + user);
-	        console.log('you made account');
+	        // console.log("This is what you pass in " + user);
+	        // console.log('you made account');
 	        $location.path('/login');
 	      });
 	    };
@@ -29848,7 +29848,7 @@
 	  app.controller('EventController', ['$scope','$http','$cookies','$location','$routeParams', function($scope, $http, $cookies,$location,$routeParams){
 	    $scope.getEvents = function(){
 	      var responseKey = $cookies.get('response');
-	      console.log(responseKey);
+	      // console.log(responseKey);
 	      $http.get('/user/events/').success(function(response){
 	        $scope.events = response.events;
 	        $scope.event ='';
@@ -29867,7 +29867,7 @@
 	    $scope.getEvent = function(event){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.get('/user/events/'+ eventId).success(function(response){
-	        console.log(response.name);
+	        // console.log(response.name);
 	        $scope.event = response;
 	        alert('http://localhost:3000/#/events/'+ eventId);
 	      });
@@ -29875,15 +29875,15 @@
 	    $scope.delete = function(event){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.delete('/user/events/'+ eventId).success(function(response){
-	        console.log('you deleted your this event!!!!!!!!!!!');
+	        // console.log('you deleted your this event!!!!!!!!!!!');
 	        $location.path('/showAllMyEvent');
 	      });
 	    }
 	    $scope.showCommitters = function(){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.get('/user/events/' + eventId + '/committers').success(function(response){
-	        console.log(eventId);
-	        console.log("committers " + response.committers[0].name);
+	        // console.log(eventId);
+	        // console.log("committers " + response.committers[0].name);
 	        $scope.committers = response.committers;
 	        $scope.committer = '';
 	        $location.path('/showEvent');
@@ -29896,7 +29896,7 @@
 	    $scope.joinCommiter = function(user){
 	      var eventId = $routeParams.event || $cookies.get('eventId');
 	      $http.post('/user/events/'+ eventId + '/committers', user).success(function(response){
-	        console.log("you are joined!");
+	        // console.log("you are joined!");
 	        $location.path('/events/'+ eventId + '/');
 	      });
 	    }
@@ -29914,13 +29914,13 @@
 	module.exports = function(app){
 	  app.controller('loginController', ['$scope','$http','$cookies','$location', function($scope, $http, $cookies,$location){
 	    $scope.refresh = function(user){
-	      console.log(user.username);
-	      console.log(user.password);
+	      // console.log(user.username);
+	      // console.log(user.password);
 	      $http.post('/auth', user).success(function(response){
 	        var responseCookie = $cookies.put('response',response.token);
 	        var responseKey = $cookies.get('response');
 	        $http.defaults.headers.common['x-access-token'] = responseKey;
-	        console.log("this is your cookie please don't lose it "+ responseKey);
+	        // console.log("this is your cookie please don't lose it "+ responseKey);
 	        $location.path('/showAllMyEvent');
 	      });
 	    };
